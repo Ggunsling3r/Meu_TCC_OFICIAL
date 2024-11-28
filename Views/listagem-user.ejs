@@ -1,0 +1,187 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de usuário</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+       
+
+        #b2{
+          background-color: darkorange;
+          color: white;
+          border-color: darkorange;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: darkgoldenrod;
+            border-radius: 8px;
+            border-color: darkgoldenrod;
+        }
+
+
+       
+
+
+        select{
+          cursor: pointer;
+        }
+
+
+      
+
+
+
+       
+        
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+
+    <br><br><br><br><br>
+     
+
+    <% dadosusuario.forEach(function(dados) { %>
+
+      <center>
+
+        <% if( nome && boolean == 0) {  %>
+
+      <h1>Seu perfil</h1><br><br>
+      
+      <% } else if(nome && boolean == 1) {  %>
+
+        <h1>Perfil de <%= dados.nome %> </h1><br><br>
+        <%  } %>
+
+      
+
+
+
+
+
+
+      
+    <div class="container">
+        <div class="main-body">        
+        
+
+
+          <div class="card" style="border-color: #000080; width: 600px;" >
+
+            <br>
+
+            <div class="profile-image">
+                <div class="image">
+
+                  <img  style=" border-radius: 50%; object-fit: cover; " src="/imagesUser/<%=dados.imagem%>" alt="Erro na imagem"  width="170" >
+
+                </div>
+
+                <br>
+
+                <div class="title">
+                  <p style="font-size: 25px;" ><b>Nome:</b> <%=dados.nome%> </p>
+
+                </div>
+
+                <div class="about">
+
+                  <p style="font-size: 25px;" ><b>E-mail:</b> <%=dados.email%> </p>
+                          <p style="font-size: 25px;" ><b>Telefone:</b> <%=dados.telefone%> </p>
+                </div>
+
+                <% if( nome && boolean == 0) {  %>
+                  <br>
+                  <a class="btn btn-primary" id="b2" href="/editaru/<%=dados.id %>" style="float: center;" role="button"><i class="material-icons">edit</i>Editar perfil</a>
+               <br><br>
+                <% } %>
+
+            </div>
+
+
+          </div>
+
+          <br><br><br>
+             
+                  
+                </center>
+
+                  <% }) %>
+
+                </div>
+              </div>
+              
+            
+
+         
+
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

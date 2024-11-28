@@ -1,0 +1,229 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de serviço</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+
+    <style>
+
+
+
+
+#ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #A71752;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+     
+
+      
+
+      
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    
+    <%- include('layout/amenu'); %>
+
+   
+
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Edição dos dados do(a) profissional</h1>
+        </center>
+        <br>
+        <br>
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+
+              <% dadosprofissional.forEach(function(dados) { %>
+              
+              <form enctype="multipart/form-data" action="/fazedicaop/<%=dados.id %>" method="POST">
+                
+          
+                 
+
+                <div class="mb-3">
+                <label for="nome"  id="la1" class="form-label"><i class="material-icons">badge</i>Nome do(a) profissional</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" required placeholder="Nome" value= "<%=dados.nome %>"  id="nome" name="nome">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="email"  id="la1" class="form-label"><i class="material-icons">mail</i>Email</label>
+                    <input type="email" style="border-color: #A71752;" class="form-control" id="email" value= "<%=dados.email %>" required name="email" placeholder="nome@exemplo.com" >
+                    </div>
+    
+                    <div class="mb-3">
+                      <label for="horaComeca"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que o(a) profissional começa a trabalhar</label>
+                      <input type="time" style="border-color: #A71752;" required class="form-control" placeholder="Horário" value= "<%=dados.horaComeca %>" id="horaComeca" name="horaComeca">
+                      </div>
+      
+                      <div class="mb-3">
+                      <label for="horaTermina"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que o(a) profissional termina de trabalhar</label>
+                      <input type="time" style="border-color: #A71752;" required class="form-control" placeholder="Horário" value= "<%=dados.horaTermina %>" id="horaTermina" name="horaTermina">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="servicos" id="la1" class="form-label"><i class="material-icons">work</i>Serviços que o(a) profissional vai realizar na barbearia</label>
+                    </div>
+                    
+                    <% dadosservicos.forEach(function(dados) { %>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="servicos" value="<%= dados.id %>" 
+
+                            <% if (servicosAssociados.some(servico => servico.servico_id === dados.id)) { %>
+                                checked
+                            <% } %>
+
+                            id="servico-<%= dados.id %>">
+                            <label class="form-check-label" for="servico-<%= dados.id %>">
+                                <%= dados.nome %>
+                            </label>
+                            
+                        </div>
+                    <% }); %>
+                    
+    
+                    <div class="mb-3">
+                        <label for="imagem"  id="la1" class="form-label"><i class="material-icons">image</i>Foto do(a) profissional</label>
+                        <input type="file" style="border-color: #A71752;" class="form-control" value= "/imagesPro/<%=dados.imagem %>" id="imagem" name="imagem" >
+                    </div>
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Atualizar dados</button>
+                    </center>
+                    <br><br>
+                    <%  }) %>
+              </form>
+        
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

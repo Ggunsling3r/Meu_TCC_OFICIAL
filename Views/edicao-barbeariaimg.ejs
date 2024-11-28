@@ -1,0 +1,260 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de barbearia</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+   
+
+    <style>
+
+
+
+    #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #A71752;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #la3{
+        font-size: 30px;
+      }
+
+      #la4{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      
+
+
+
+
+    </style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    document.getElementById("cep").addEventListener('input', function() {
+      var cep = this.value.replace(/\D/g, '');
+  
+     
+      if (cep.length === 8) {
+        var url = "https://viacep.com.br/ws/" + cep + "/json/";
+
+        
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            if (!("erro" in data)) {
+             
+              document.getElementById("estado").value = data.uf;
+              document.getElementById("cidade").value = data.localidade;
+              document.getElementById("bairro").value = data.bairro;
+              document.getElementById("rua").value = data.logradouro;
+            } else {
+              alert("CEP não encontrado.");
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao consultar o CEP:', error);
+          });
+      }
+    });
+  });
+
+
+
+function validateFiles(input, errorId) {
+    const fileError = document.getElementById(errorId);
+    const files = input.files;
+
+  
+    if (files.length > 4) {
+        fileError.style.display = 'block';
+        input.value = ''; 
+    } else {
+        fileError.style.display = 'none';
+    }
+}
+
+
+
+</script>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    
+    <%- include('layout/amenu'); %>
+
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Edição das fotos do interior da sua barbearia</h1>
+        </center>
+        <br>
+        <br>
+
+
+        <% dadosBarbearia.forEach(function(dados) { %>
+
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+        
+              <form enctype="multipart/form-data" action="/fazedicaoimg/<%=dados.id %>" method="POST">
+
+
+                <div class="mb-3">
+                    <label for="interior"  id="la4" class="form-label"><i class="material-icons">image</i>Fotos do interior barbearia</label>
+                    <input type="file" style="border-color: #A71752;" class="form-control" required id="interior" name="nomeimginterior" multiple accept="image/*" onchange="validateFiles(this, 'cadastroError')" >
+                    <div id="cadastroError" style="color: red; display: none;">Por favor, selecione até 4 imagens.</div>
+                </div>
+
+              
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Editar</button>
+                    </center>
+                    <br><br>
+
+                    <%  }) %>
+
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+
+</html>
+
+
+
+
+

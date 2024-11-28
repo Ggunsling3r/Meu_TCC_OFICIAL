@@ -1,0 +1,413 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer Agendamento</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+
+    <style>
+
+
+
+    #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #000080;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #la3{
+        font-size: 30px;
+      }
+
+      #la4{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      .hcontainer {
+      display: flex;
+      flex-wrap: wrap; 
+      gap: 10px;
+      }
+
+      .hcontainer .form-check {
+      flex: 1 1 calc(25% - 10px); 
+      min-width: 150px; 
+      }
+
+      
+
+      .indisponivel {
+    color: red;
+    text-decoration: line-through;
+}
+
+
+
+
+    </style>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const dateInput = document.getElementById('date');
+
+      function setMinDate() {
+          const today = new Date();
+          const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+          dateInput.setAttribute('min', todayString);
+      }
+
+      setMinDate();
+
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedDate = urlParams.get('date');
+      if (selectedDate) {
+          dateInput.value = selectedDate; 
+      }
+
+      function updateHorarios() {
+          const now = new Date();
+          const selectedDateStr = dateInput.value;
+          if (!selectedDateStr) return;
+
+          const [year, month, day] = selectedDateStr.split('-');
+          const selectedDateMidnight = new Date(year, month - 1, day);
+          const isToday = selectedDateMidnight.getTime() === new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+          const timeOptions = document.querySelectorAll('.form-check-input[name="horario"]');
+          let hasAvailableTime = false;
+
+          timeOptions.forEach(option => {
+              const time = option.value.split(':');
+              const optionHour = parseInt(time[0], 10);
+              const optionMinutes = parseInt(time[1], 10);
+              const optionDate = new Date(selectedDateMidnight);
+              optionDate.setHours(optionHour, optionMinutes);
+
+              if (isToday && optionDate.getTime() <= now.getTime()) {
+                  option.disabled = true;
+                  option.parentElement.style.display = 'none';
+              } else {
+                  option.disabled = false;
+                  option.parentElement.style.display = '';
+                  hasAvailableTime = true;
+              }
+          });
+
+          const mensagem = document.getElementById('mensagem-horarios');
+            const agendarButton = document.getElementById('btnlog'); 
+
+            if (!hasAvailableTime) {
+                mensagem.style.display = 'block';
+                mensagem.textContent = `O profissional não tem mais horários disponíveis para essa data.`;
+                agendarButton.style.display = 'none'; 
+                
+                timeOptions.forEach(option => {
+                    option.parentElement.style.display = 'none';
+                });
+            } else {
+                mensagem.style.display = 'none';
+                agendarButton.style.display = 'block'; 
+            }
+        }
+
+
+        
+
+      function fetchHorariosOcupados() {
+          const selectedDateStr = dateInput.value;
+          const profissionalId = document.querySelector('input[name="id_profissional"]').value;
+
+          if (!selectedDateStr) return;
+
+          
+          const [year, month, day] = selectedDateStr.split('-');
+          const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`; 
+
+        
+          window.location.href = `/ragendar/${profissionalId}?date=${formattedDate}`;
+      }
+
+      
+
+      
+      function debounce(func, delay) {
+          let timeout;
+          return function(...args) {
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(this, args), delay);
+          };
+      }
+
+    
+      dateInput.addEventListener('input', debounce(function() {
+          if (this.value) {
+              fetchHorariosOcupados();
+          }
+      }, 1000)); 
+
+      
+      updateHorarios();
+  });
+</script>
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+    
+    <%- include('layout/amenu'); %>
+
+    
+ 
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Faça o seu agendamento!</h1>
+        </center>
+        <br>
+        <br>
+
+        <% dadosprofissional.forEach(function(dados) { %>
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+        
+              <form enctype="multipart/form-data" action="/fagendar" method="POST">
+
+                <center>
+                <h2>Profissional escolhido:</h2>
+                 <img src="/imagesPro/<%=dados.imagem %>"  alt="erro na imagem" height="" width="170">
+                <h2><%= dados.nome %></h2></center>
+                <br>
+
+                <input type="hidden" name="id_profissional" value="<%= dados.id %>">
+                <input type="hidden" id="nome-profissional" value="<%= dados.nome %>">
+
+               
+
+                
+                <div class="mb-3">
+                  <label for="date"  id="la2" class="form-label"><i class="material-icons">calendar_today</i>Dia do agendamento</label>
+
+                  <input type="date" style="border-color: #000080;" class="form-control" required id="date" name="date" min="<%= new Date().toISOString().split('T')[0] %>">
+                  
+                  
+                </div>
+
+
+               
+                
+
+                <% if (dados.servico) { %>
+                  <label for="ser" id="la1" class="form-label"><i class="material-icons">content_cut</i>Escolha um serviço:</label>
+
+                  <div class="hcontainer">
+
+                    
+                
+                    
+                  <% let servicos = dados.servico.split(', '); %>
+                
+                  <% servicos.forEach(function(servico, index) { %>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="servicos" required value="<%= dados.servicoId.split(', ')[index] %>" id="servico-<%= index %>">
+                      <label class="form-check-label" for="servico-<%= index %>"><%= servico %></label>
+                    </div>
+                  <% }); %>
+                  
+                <% } %>
+               
+             
+                  </div> <br> <br>
+
+
+                  <label for="hor" id="la1" class="form-label">
+                    <i class="material-icons">schedule</i>Escolha um horário:
+                  </label>
+                  
+
+                  <div class="form-check">
+                    <div class="hcontainer">
+                        <p id="mensagem-horarios" style="display: none; color: red;"></p>
+                
+                        <% 
+                            
+                            const horariosIndisponiveis = Array.isArray(agendamentos) ? agendamentos.map(a => a.horario) : [];
+                            let hasAvailableTime = false; 
+                
+                            if (dados.horaComeca && dados.horaTermina) {
+                                const horaInicio = new Date(`2024-01-01T${dados.horaComeca.slice(0, 5)}:00`);
+                                const horaFim = new Date(`2024-01-01T${dados.horaTermina.slice(0, 5)}:00`);
+                                const horarioIntervalo = 30;
+                
+                                while (horaInicio <= horaFim) {
+                                    const horas = horaInicio.getHours().toString().padStart(2, '0');
+                                    const minutos = horaInicio.getMinutes().toString().padStart(2, '0');
+                                    const horarioFormatado = `${horas}:${minutos}:00`;
+                
+                                    // 
+                                    const indisponivel = horariosIndisponiveis.includes(horarioFormatado);
+                                    
+                                    if (!indisponivel) {
+                                        hasAvailableTime = true; 
+                                    }
+                            %>
+                                    <div class="form-check">
+                                        <% if (!hasAvailableTime) { %>
+                                            <!-- Não exibe nenhum horário se não houver horários disponíveis -->
+                                        <% } else if (indisponivel) { %>
+                                            <span style="color: red;">
+                                                <%= horarioFormatado.slice(0, 5) %> (Indisponível)
+                                            </span>
+                                        <% } else { %>
+                                            <input class="form-check-input" type="radio" name="horario" required value="<%= horarioFormatado.slice(0, 5) %>" id="horario-<%= horarioFormatado %>">
+                                            <label class="form-check-label" for="horario-<%= horarioFormatado %>">
+                                                <%= horarioFormatado.slice(0, 5) %>
+                                            </label>
+                                        <% } %>
+                                    </div>
+                            <%
+                                    
+                                    horaInicio.setMinutes(horaInicio.getMinutes() + horarioIntervalo);
+                                }
+                            }
+                        %>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+              
+
+
+              <br><br><br>
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Agendar</button>
+                    </center>
+                    <br><br>
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <%  }); %>
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

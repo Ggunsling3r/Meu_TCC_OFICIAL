@@ -1,0 +1,287 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços da barbearia</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        
+
+        #caixa{
+          width: 18rem; 
+          background-color: #000080; 
+          border: none; 
+          margin: 15px; 
+          border-radius: 15px; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          
+        }
+
+        #l{
+          width: 270px;
+          border-radius: 15px; 
+          float: left;
+        }
+
+        #b2{
+          background-color: darkorange;
+          color: white;
+          border-color: darkorange;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: darkgoldenrod;
+            border-radius: 8px;
+            border-color: darkgoldenrod;
+        }
+
+
+        #b{
+          background-color: #A71752;
+          color: white;
+          border-color: #A71752;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #btf{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 28px;
+      }
+
+      #btf:hover{
+        background-color: green;
+      }
+
+    
+
+        
+
+        
+
+
+
+
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+
+    
+    
+
+
+    <article id="a1"></article>
+
+
+    <article id="a2">
+
+
+      
+
+        <% if (dadosservico.length > 0) { %>
+
+          <br><br><br>
+        
+          <center>
+            <h1 id="he">Serviços da <%= dadosservico[0].nome_bar %></h1>
+          </center>
+          <br>
+          <br>
+          <br>
+
+         
+            
+        <div class="row row-cols-md-3 g-4 mx-auto">
+
+          <% dadosservico.forEach(function(dados) { %>
+
+
+
+              <div class="card" id="caixa">
+                <br>
+                  <img src="/imagesSer/<%=dados.imagem %>" class="card-img-top" alt="erro na imagem" height="300em" width="100%">
+
+                  <br>
+                  <div class="card" style="border-radius: 16px;" >
+
+                 
+
+                      <ul class="list-group list-group-flush">
+                        <li id="l" class="list-group-item" style="border-radius: 15px;"> <h5 class="card-title"><%= dados.nome %></h5>
+                          <p class="card-text" style="font-size: 20px;">Duração: <b> <%= dados.tempo %> minutos </b>      
+                            <br>Preço: <b> R$ <%= dados.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></b></p>
+                            
+                        
+
+                          <% if(bid == dados.fk_id && loggedi) {  %>
+
+                            <a class="btn btn-primary" id="b2" href="/editars/<%=dados.id %>" style="float: center;" role="button"><i class="material-icons">edit</i>Editar</a>    
+                            <a class="btn btn-primary" id="b" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">delete</i>Apagar</a>
+                          
+                          </li>
+                            
+    
+    
+                          <% } else if ({}) { %>
+
+                        
+                        
+                        
+                        </li>
+
+                        <%  } %>
+
+
+
+                        <div class="modal fade" id="exampleModal<%= dados.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Apagar serviço da plataforma</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <h5>Tem certeza de que deseja apagar esse serviço?</h5>
+                              
+                              </div>
+        
+                              
+      
+                              <div class="modal-footer d-flex justify-content-center">
+                                <a href="/apagars/<%=dados.id %>" id="bt11" class="btn btn-primary">Sim</a>
+                                <button type="button" id="bt22" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                              </div>
+        
+                              
+        
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </ul>
+
+
+                  </div>
+                  <br>
+              </div>
+
+              <br>
+              
+          <% }) %>
+      </div>
+
+
+
+
+
+
+        <% } else { %>
+          
+          
+
+          <br><br><br>
+
+          <center>
+            <h3 class="alert alert-warning" role="alert">Nenhum serviço foi cadastrado nessa barbearia ainda!</h3>
+            <button onclick="window.history.back()" id="btf" class="btn btn-secondary">Voltar</button>
+          </center>
+        <% } %>
+    </div>
+    
+
+      
+  
+
+
+        
+
+    
+
+      </article>
+
+      <article id="a3"></article>
+
+
+
+
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

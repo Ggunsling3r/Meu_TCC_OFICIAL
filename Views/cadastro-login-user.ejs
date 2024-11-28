@@ -1,0 +1,201 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de cliente</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+
+    <style>
+
+
+
+    #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #000080;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #la3{
+        font-size: 30px;
+      }
+
+      #la4{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    
+    <%- include('layout/amenu'); %>
+
+    
+  <%  if(aviso == "Já existe um usuário com esse e-mail!") {   %>
+
+    <br><br>
+    <center>
+    <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+    </center> 
+
+  <% } %>
+
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Faça o seu cadastro como cliente!</h1>
+        </center>
+        <br>
+        <br>
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+        
+              <form enctype="multipart/form-data" action="/cadastrar" method="POST">
+
+                <div class="mb-3">
+                <label for="nome"  id="la1" class="form-label"><i class="material-icons">badge</i>Nome completo</label>
+                <input type="text" style="border-color: #000080;" class="form-control" placeholder="Seu nome" required id="nome" name="nome">
+                </div>
+                
+                <div class="mb-3">
+                <label for="email"  id="la2" class="form-label"><i class="material-icons">mail</i>E-mail</label>
+                <input type="email" style="border-color: #000080;" class="form-control" required id="email" name="email" placeholder="nome@exemplo.com" >
+                </div>
+
+                <div class="mb-3">
+                  <label for="telefone"  id="la1" class="form-label"><i class="material-icons">phone</i>Telefone</label>
+                  <input type="text" style="border-color: #000080;"  pattern="\(\d{2}\) 9\d{4}-\d{4}" title="Formato: (51) 91234-5678" class="form-control" placeholder="Telefone" required id="telefone" name="telefone">
+                  </div>
+             
+                <div class="mb-3">
+                  <label for="senha"  id="la3" class="form-label"><i class="material-icons">lock</i>Senha</label>
+                  <input type="password" style="border-color: #000080;" class="form-control" placeholder="Crie uma senha" required name="senha" id="senha">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile"  id="la4" class="form-label"><i class="material-icons">image</i>Foto de perfil</label>
+                    <input type="file" style="border-color: #000080;" class="form-control" required id="profile" name="nomeimg" >
+                </div>
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
+                    <br><br>
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

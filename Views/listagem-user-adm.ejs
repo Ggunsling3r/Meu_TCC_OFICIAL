@@ -1,0 +1,333 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de usuários</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        #b{
+          background-color: darkred;
+          color: white;
+          border-color: darkred;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #b:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+
+        #bd{
+          left: 100%;
+          background-color: #00008B;
+          color: white;
+          border-color: #00008B;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #bd:hover {
+            background-color: blue;
+            border-radius: 8px;
+            border-color: blue;
+        }
+
+
+        select{
+          cursor: pointer;
+        }
+
+        #b2{
+          background-color: maroon;
+          color: white;
+          border-color: maroon;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: firebrick;
+            border-radius: 8px;
+            border-color: firebrick;
+        }
+
+
+        #bt11{
+        background-color: darkgreen;
+        border-color: white;
+        font-size: 18px;
+      }
+
+      #bt11:hover{
+        background-color: green;
+      }
+
+      #bt22{
+        background-color: firebrick;
+        border-color: white;
+        font-size: 18px;
+      }
+
+      #bt22:hover{
+        background-color: maroon;
+      }
+
+
+        #btft{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      #btft:hover{
+        background-color: green;
+      }
+      
+    
+
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+    
+        
+
+          <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkblue;"> 
+            
+            
+
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+    
+
+                 
+                  <label class="navbar-brand" style="color: white; font-size: 20px;"><i class="material-icons">search</i>Pesquisar nome de usuário: </label>
+    
+                  </li> 
+                  
+                  &nbsp; &nbsp;
+                  
+                  <center>
+    
+                  <form action="/filtra" class="form-inline">
+    
+                  <li class="nav-item " >
+    
+                    <label style="color: white; font-size: 20px;">
+                      <input list="nom" name="nome">
+                  </label>
+                  
+                  <% 
+                      
+                      const nomesUnicos = new Set(); 
+
+                      dadosusuario.forEach(function(dados) {
+
+                          if (dados.email !== "contatoBarberPro@gmail.com") {
+
+                              nomesUnicos.add(dados.nome);
+
+                          }
+
+                      });
+
+                  %>
+                  
+                  <datalist id="nom">
+
+                      <% nomesUnicos.forEach(function(nome) { %>
+
+                          <option value="<%= nome %>"><%= nome %></option>
+                          
+                          <%  }); %>
+
+                  </datalist>
+                    
+                    &nbsp; &nbsp;
+                    
+                        <button type="submit" id="btft" class="btn btn-primary">Pesquisar</button>
+                        
+              
+              
+                      </form>
+    
+                    </center>
+    
+                </ul>
+
+               
+                
+    
+                </div>
+        </div>    
+    
+        <br><br>
+        
+          </nav>
+
+         
+    
+
+          <br><br>
+        
+        <center>
+        <h1 id="he">Lista de usuários</h1>
+        </center>
+        <br>
+        <br>
+        <br>
+
+
+
+        <% if(aviso == "Nenhum usuário atende a esses filtros") {  %>
+
+          
+          <center>
+          <h3 class="alert alert-dark" role="alert"><%= aviso %></h3>
+          </center>
+
+
+        <% } else if (dadosusuario.length === 0) {  %>
+
+          <center>
+            <h3 class="alert alert-warning" role="alert">Nenhum usuário foi cadastrado no sistema ainda!</h3>
+          </center>
+
+
+        <% } else { %>
+
+          <% dadosusuario.forEach(function(dados) { %>
+            
+            
+            <% if (dados.email != "contatoBarberPro@gmail.com") { %>
+
+              
+             
+              <div class="card">
+                
+              <div class="card-body" style=" background-color: rgb(255, 255, 255); ">
+                
+                
+    
+                <img height="50px" width="50px" style="border-radius: 50%;" src="/imagesUser/<%= dados.imagem %>" alt="erro na imagem">&nbsp;&nbsp;
+                <a class="navbar-brand" style="color: black;"> | </a>
+                <a class="navbar-brand" style="color: black;"><%= dados.nome %></a>
+                <a class="navbar-brand" style="color: black;"> | </a>
+               
+               
+    
+        
+    
+                  <a class="btn btn-primary" id="bd" href="/verper/<%=dados.id %>" style="float: right;  margin-left: 15px;" role="button"><i class="material-icons">info</i>Ver mais detalhes</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    
+                  
+    
+                  <a class="btn btn-primary" style=" float: right; " id="b2" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>"><i class="material-icons">delete</i>Apagar usuário</a>&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp
+                  
+                  <div class="modal fade" id="exampleModal<%= dados.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Apagar usuário da plataforma</h5>
+                          <a  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                        </div>
+                        <div class="modal-body">
+                          <h5>Tem certeza de que deseja apagar esse usuário?</h5>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                          <a href="/apagau/<%=dados.id %>" id="bt11" class="btn btn-primary">Sim</a>
+                          <a href="/listagem-user-adm" id="bt22" class="btn btn-primary">Não</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+            
+              </div>
+              
+            </div>
+
+          
+    
+              <% }}) %>
+         
+
+          <% } %>
+
+
+
+        
+         
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

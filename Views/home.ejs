@@ -1,0 +1,410 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Pro</title>
+
+
+
+    <style>
+
+
+    @import url('https://fonts.cdnfonts.com/css/right-swipe-personal-use');
+
+                
+
+
+
+        #texto{
+            text-align: left;
+            text-align: justify;
+            color: black;
+            font-size: 22px;
+        }
+
+        .content-container {
+        border-radius: 10px; 
+        padding: 20px; 
+        margin: 20px; 
+        width: 60%;
+
+    }
+
+    #tit{
+        font-family: 'Right Swipe Personal Use', sans-serif;
+        color: black;
+    }
+
+    #a1{
+        height: 530px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    #a2{
+        height: 600px;
+        background-color: red;
+    }
+
+
+    
+
+
+
+    /* Definindo o layout de seções */
+    .section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 40px 0;
+        padding: 0 10%;
+    }
+
+    .image-left, .image-right {
+        flex: 1;
+    }
+
+    .text-right, .text-left {
+        flex: 2;
+        padding: 0 20px;
+    }
+
+    .text-right {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    /* Garantir que as imagens fiquem ajustadas */
+    .image-left img, .image-right img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+
+    .image-left img {
+    margin-right: 10px; /* Aproxima o texto da imagem */
+}
+
+
+
+
+
+
+    </style>
+
+
+<link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+</head>
+
+
+
+
+
+<body >
+
+    <%- include('layout/amenu'); %>
+
+    <% if(aviso == "Login realizado com sucesso!") { %>
+      
+      <br><br>
+      <center>
+      <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+      </center>
+
+      <% } else if(aviso == "Serviço deletado com sucesso!") { %>
+
+        <br><br>
+      <center>
+      <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+      </center>
+
+        <% } else if(aviso == "Profissional deletado(a) com sucesso!") { %>
+
+          <br><br>
+      <center>
+      <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+      </center>
+
+      <% } else if(aviso == "Cadastro de profissional realizado com sucesso!") { %>
+
+        <br><br>
+    <center>
+    <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+    </center>
+
+    <% } else if(aviso == "Cadastro de serviço realizado com sucesso!") { %>
+
+      <br><br>
+      <center>
+      <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+      </center>
+
+      <% } else if(aviso == "Você não tem permissão para acessar essa página!") {  %>
+
+        <br><br>
+        <center>
+        <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+        </center>
+
+        <%  } else if(aviso == "Serviço editado com sucesso!") {  %>
+
+          <br><br>
+      <center>
+      <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+      </center>
+
+        <%  } else if(aviso == "Profissional editado(a) com sucesso!") {  %>
+
+            <br><br>
+        <center>
+        <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+        </center> 
+        
+        
+        <%  } else if(aviso =="Você precisa fazer login para acessar essa página!") {  %>
+
+          <br><br>
+          <center>
+          <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+          </center> 
+
+          <%  } else if(aviso == "Você precisa estar logado como usuário para acessar essa página!") {  %>
+
+
+            <br><br>
+          <center>
+          <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+          </center> 
+
+
+            <% } else if(aviso == "Conta deletada com sucesso!")  { %>
+             
+              <br><br>
+              <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center> 
+
+              <%  } else if(aviso == "Barbearia deletada com sucesso!") {  %>
+
+                <br><br>
+              <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center> 
+
+                <% } else if(aviso == "Usuário deletado com sucesso!") {  %>
+
+                  <br><br>
+              <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center> 
+
+              <%  } else if(aviso == "Perfil editado com sucesso!") {   %>
+
+                    <br><br>
+                    <center>
+                    <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+                    </center> 
+
+            <%  } else if(aviso == "Seu agendamento foi realizado com sucesso, verifique na aba 'Meus agendamentos!'") {  %>
+
+              <br><br>
+              <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center> 
+
+              <%  } else if(aviso == "Imagens do interior editadas com sucesso!") {  %>
+
+                <br><br>
+              <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center> 
+
+
+                <%  } else if (aviso == "Erro ao editar imagens!") {  %>
+
+                  <br><br>
+              <center>
+              <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+              </center> 
+
+
+                <%  } else if(aviso == "Avaliação realizada com sucesso!") {  %>
+
+                  <br><br>
+                  <center>
+                  <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+                  </center> 
+    
+
+                  <%  } else if(aviso == "Avaliação deletada com sucesso!") {  %>
+
+                    <br><br>
+                    <center>
+                    <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+                    </center> 
+      
+
+                    <%  } else if (aviso == "Você já avaliou esse profissional!") {  %>
+
+                      <br><br>
+                  <center>
+                  <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+                  </center> 
+          
+                  <br><br>
+          
+
+                    <%  } else if (aviso == "Você já avaliou essa barbearia!") {  %>
+
+                      <br><br>
+                  <center>
+                  <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+                  </center> 
+          
+                    <br><br>
+        
+                    <%  } else if (aviso == "Você precisa selecionar um serviço da barbearia para o(a) profissional!") {  %>
+
+                      <br><br>
+                  <center>
+                  <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+                  </center> 
+          
+                    <br><br>
+          
+
+                    <%  } else if (aviso == "Agendamento deletado com sucesso!") {  %>
+
+                      <br><br>
+                  <center>
+                  <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+                  </center> 
+          
+                    <br><br>
+          
+
+                    <%  } else if (aviso == "Você não tem nenhum agendamento!") {  %>
+
+                      <br><br>
+                  <center>
+                  <h3 class="alert alert-warning" role="alert"><%= aviso %></h3>
+                  </center> 
+          
+                    <br><br>
+          
+                    <%  }   %>
+
+
+            
+    <article id="a1">
+
+    <br><br><br><br>
+
+    <center>
+    <h1 id="tit">Bem-vindo(a)!</h1>
+    </center>
+
+    <br><br><br>
+
+
+    <center>
+    <div class="content-container" >
+
+        <p id="texto">
+          A Barber Pro é uma plataforma web inovadora, criada para facilitar a conexão entre clientes e barbearias, 
+          oferecendo um ambiente organizado e acessível para agendamento de serviços. Nossa missão é proporcionar 
+          uma experiência de qualidade para ambos os lados, ajudando pequenos negócios a se destacarem no mercado 
+          e garantindo que os clientes encontrem o serviço ideal com praticidade e agilidade.                                           
+        </p>
+       
+        </center>
+        </div>
+<br>
+
+        <div class="section">
+          <div class="image-left">
+              <img src="https://i.pinimg.com/originals/b9/e3/f7/b9e3f7bc7ea1208f7ba80d0b22f1f2da.png" 
+                   alt="Imagem para clientes" height="300px" width="250px">
+          </div>
+          <div class="text-right" id="texto" >
+              <h2 style="color: #000080 ;" >Para Clientes:</h2>
+              <p>
+                  Na Barber Pro, você pode explorar barbearias próximas a você, ver avaliações de outros clientes e agendar 
+                  serviços de forma rápida e simples. Escolha o profissional de sua preferência, selecione o serviço desejado 
+                  e agende no melhor horário para você. Além disso, após o serviço, você pode avaliar tanto o profissional quanto 
+                  a barbearia, ajudando outros clientes a fazerem suas escolhas e contribuindo para a qualidade do atendimento.
+              </p>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="text-left" id="texto" >
+              <h2 style="color: #A71752;" >Para Donos(as):</h2>
+              <p>
+                  Com a Barber Pro, sua barbearia ganha visibilidade e organização. Você pode cadastrar sua equipe, listar os serviços 
+                  oferecidos, gerenciar horários e receber feedback dos clientes. Nossa plataforma ajuda a otimizar a gestão do seu 
+                  negócio, permitindo que você foque no que mais importa: atender bem seus clientes.
+              </p>
+          </div>
+          <div class="image-right">
+              <img src="https://png.pngtree.com/png-clipart/20240521/original/pngtree-black-sillhoutte-man-for-barber-shop-logo-png-image_15147398.png" 
+                   alt="Imagem para donos" height="400px" width="350px">
+          </div>
+      </div>
+
+    </article>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
+
+        <center>
+        <div class="content-container" >
+
+        <article id="a2">
+
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="https://webtrends.net.br/wp-content/uploads/2020/10/Como-atrair-clientes-para-barbearia.png" height="600px" width="450px" class="d-block w-100" alt="Erro na imagem">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://img.freepik.com/fotos-premium/barbearia-do-cabeleireiro-masculino-de-instrumentos_356893-982.jpg" height="600px" width="450px" class="d-block w-100" alt="Erro na imagem">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://png.pngtree.com/background/20230519/original/pngtree-checkered-flooring-in-a-barber-shop-picture-image_2651920.jpg" height="600px" width="450px" class="d-block w-100" alt="Erro na imagem">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
+        </article>
+
+        </div>
+        </center>
+
+
+    <%- include('layout/footer'); %>
+
+
+
+</body>
+
+
+
+</html>

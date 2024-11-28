@@ -1,0 +1,296 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do agendamento</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        #b{
+          background-color: darkred;
+          color: white;
+          border-color: darkred;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #b:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+        #b2{
+          background-color: darkgoldenrod;
+          color: white;
+          border-color: darkgoldenrod;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: goldenrod;
+            border-radius: 8px;
+            border-color: goldenrod;
+        }
+
+        #b3{
+          background-color: darkgreen;
+          color: white;
+          border-color: darkgreen;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+        #b4{
+          background-color: #A71752;
+          color: white;
+          border-color: #A71752;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b4:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #bd{
+          left: 100%;
+          background-color: darkred;
+          color: white;
+          border-color: darkred;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #bd:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+
+        select{
+          cursor: pointer;
+        }
+
+
+        #a1{
+        width: 35%;
+        height: 370px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #a2{
+        width: 30%;
+        height: 370px;
+        background-color: white;
+        float: left;
+      }
+
+      #a3{
+        width: 35%;
+        height: 370px;
+        background-color: white;
+        float: right;
+      }
+
+
+
+
+       
+
+
+
+
+    </style>
+
+ 
+        
+<script>
+  function formatarData(data, horario) {
+      const diasSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+      const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+      const date = new Date(data);
+      const diaSemana = diasSemana[date.getDay()];
+      const dia = date.getDate();
+      const mes = meses[date.getMonth()];
+      const ano = date.getFullYear();
+
+      const [horas, minutos] = horario.split(':');
+      const horarioFormatado = `${horas}:${minutos}`;
+
+      return `${diaSemana} dia ${dia} de ${mes} de ${ano} às ${horarioFormatado}`;
+  }
+
+  window.onload = function() {
+      const elementosData = document.querySelectorAll('.data-agendamento');
+      elementosData.forEach(elemento => {
+          const data = elemento.getAttribute('data-data');
+          const horario = elemento.getAttribute('data-horario');
+          const dataFormatada = formatarData(data, horario);
+          elemento.innerHTML = ` <p style=" font-size: 20px;" > <b> Data do agendamento: </b><br>${dataFormatada} </p>  `;
+      });
+  }
+</script>
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+    
+    <br><br><br>
+        
+    
+
+    <article id="a1"></article>
+ 
+
+
+    <article id="a2">
+
+        <% if (dadosagendamento.length > 0) { %>
+            <% dadosagendamento.forEach(function(dados) { %>
+                <div class="card" style="border-color: black;">
+                   
+                    <img class="card-img-top" src="/imagesBar/<%= dados.imagem_barbearia %>" alt="erro na imagem" height="466px" width="559px">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title"><b><%= dados.nome_barbearia %></b>  - <b><%= dados.telefone_barbearia %></b> </h5>
+                        <hr>
+
+                
+                        <ul class="list-group list-group-flush">
+
+                          <center>
+                       
+                          <li class="list-group-item"> <b>Estado: </b> <%= dados.estado %> &nbsp;&nbsp; <b> Cidade: </b> <%= dados.cidade %>  &nbsp;&nbsp; <b> Bairro: </b> <%= dados.bairro %>   &nbsp;&nbsp; </li>
+                          <li class="list-group-item"> <b> Rua: </b> <%= dados.rua %> &nbsp;&nbsp; <b> N°: </b> <%= dados.numero %></li>
+                  
+                          
+
+                          <li class="list-group-item">
+                              <img src="/imagesPro/<%= dados.imagem_profissional %>" style=" border-radius: 50%; object-fit: cover; " alt="erro na imagem" height="150px" width="150px">
+                          </li>
+                         
+                          <li class="list-group-item"> <b>Profissional:</b> <%= dados.nome_profissional %></li>
+                          <li class="list-group-item"> <b>Serviço:</b> <%= dados.nome_servico %> &nbsp;&nbsp; <b>Preço:</b> R$ <%= dados.preco_servico.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>   &nbsp;&nbsp; <b> Duração: </b> <%= dados.tempo_servico %> minutos  </li>
+                          
+                        
+
+                          <li class="list-group-item" style="font-size: 20px;"> <b>Cliente:</b> <%= dados.nome_cliente %> - <%= dados.telefone_cliente %></li>
+                        
+                        </center>
+                          <br>
+                          
+                          <center>
+  
+                          <p class="data-agendamento" data-data="<%= dados.data %>" data-horario="<%= dados.horario %>"> Data do agendamento:  </p>
+  
+                          </center>
+
+
+
+
+
+                    </div>
+                
+                   
+
+                    </ul>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>Nenhum dado encontrado para este agendamento.</p>
+        <% } %>
+       
+
+      </article>
+
+
+      <article id="a1"></article>
+
+   
+
+
+
+
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

@@ -1,0 +1,202 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+
+       
+
+        #p2{
+           
+            color: white;
+            font-size: 20px;
+            background-color:#000080;
+            width: 99%;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>      
+
+
+
+    <% if(nome && boolean == 1) {  %>
+
+        <br><br><br><br><br><br><br>
+
+        <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+        <footer style="background-color: #000080; color: white; padding: 20px; width: 100%; position: relative; margin: 0 auto;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Contato</h4>
+                        <br>
+                        <p id="p2"><i class="material-icons">contact_mail</i><strong>Email:</strong> contatoBarberPro@gmail.com</p>
+                        <p id="p2"><i class="material-icons">call</i><strong>Telefone:</strong> (51) 91234-0129</p>
+                    </div>
+                    <div id="cool" class="col-md-6">
+                       
+                    <h4>Links Rápidos</h4>
+                        <ul>
+                            <li><a style="color: white;" href="/">Home</a></li>
+                            <li><a style="color: white;" href="/listagem-bar">Lista de barbearias</a></li>
+                            <li><a style="color: white;" href="/listagem-user-adm">Lista de usuários</a></li>
+                        </ul>
+                    </div>
+                    <br><br><br><br><br><br>
+                    <center>
+                        <br>
+                        <p id="p2"> &copy; 2024 Copyright Barber Pro.</p>
+                    
+                </div>
+            </div>
+        </footer>
+        <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+        </center>
+    
+
+    <% } else if (nom) {  %>
+
+
+        <br><br><br><br><br><br><br>
+
+        <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+        <footer style="background-color: #000080; color: white; padding: 20px; width: 100%; position: relative; margin: 0 auto;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Contato</h4>
+                        <br>
+                        <p id="p2"><i class="material-icons">contact_mail</i><strong>Email:</strong> contatoBarberPro@gmail.com</p>
+                        <p id="p2"><i class="material-icons">call</i><strong>Telefone:</strong> (51) 91234-0129</p>
+                    </div>
+                    <div id="cool" class="col-md-6">
+                    <h4>Links Rápidos</h4>
+                        <ul>
+                            <li><a style="color: white;" href="/">Home</a></li>
+                            <li><a style="color: white; cursor: pointer; text-decoration: underline;" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a></li>
+                            <li><a style="color: white; cursor: pointer; text-decoration: underline; " data-bs-toggle="modal" data-bs-target="#exampleModal2">Cadastro</a></li>
+                            <li><a style="color: white;" href="/listagem-bar">Lista de barbearias</a></li>
+                            <li><a style="color: white;" href="/agendar">Agendar</a></li>
+
+                        </ul>
+                    </div>
+                    <br><br><br><br><br><br>
+                    <center>
+                        <br>
+                        <p id="p2"> &copy; 2024 Copyright Barber Pro.</p>
+                    
+                </div>
+            </div>
+        </footer>
+        <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+        </center>        
+
+
+
+        <% } else if(nome && boolean == 0) {  %>
+
+            <br><br><br><br><br><br><br>
+
+            <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+            <footer style="background-color: #000080; color: white; padding: 20px; width: 100%; position: relative; margin: 0 auto;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Contato</h4>
+                            <br>
+                            <p id="p2"><i class="material-icons">contact_mail</i><strong>Email:</strong> contatoBarberPro@gmail.com</p>
+                            <p id="p2"><i class="material-icons">call</i><strong>Telefone:</strong> (51) 91234-0129</p>
+                        </div>
+                        <div id="cool" class="col-md-6">
+                        <h4>Links Rápidos</h4>
+                            <ul>
+                                <li><a style="color: white;" href="/">Home</a></li>
+                                <li><a style="color: white;" href="/listagem-bar">Lista de barbearias</a></li>
+                                <li><a style="color: white;" href="/agendar">Agendar</a></li>
+                                <li><a style="color: white;" href="/agendamentos/<%= bid2 %>">Meus agendamentos</a></li>
+
+                            </ul>
+                        </div>
+                        <br><br><br><br><br><br>
+                        <center>
+                            <br>
+                            <p id="p2"> &copy; 2024 Copyright Barber Pro.</p>
+                        
+                    </div>
+                </div>
+            </footer>
+            <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+            </center>        
+
+
+
+            <%  } else {   %>
+
+
+                <br><br><br><br><br><br><br>
+
+                <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+                <footer style="background-color: #000080; color: white; padding: 20px; width: 100%; position: relative; margin: 0 auto;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Contato</h4>
+                                <br>
+                                <p id="p2"><i class="material-icons">contact_mail</i><strong>Email:</strong> contatoBarberPro@gmail.com</p>
+                                <p id="p2"><i class="material-icons">call</i><strong>Telefone:</strong> (51) 91234-0129</p>
+                            </div>
+                            <div id="cool" class="col-md-6">
+                            <h4>Links Rápidos</h4>
+                                <ul>
+                                    <li><a style="color: white;" href="/">Home</a></li>
+                                    <li><a style="color: white; cursor: pointer; text-decoration: underline;" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a></li>
+                                    <li><a style="color: white; cursor: pointer; text-decoration: underline; " data-bs-toggle="modal" data-bs-target="#exampleModal2">Cadastro</a></li>
+                                    <li><a style="color: white;" href="/listagem-bar">Lista de barbearias</a></li>
+                                    <li><a style="color: white;" href="/agendar">Agendar</a></li>
+    
+                                </ul>
+                            </div>
+                            <br><br><br><br><br><br>
+                            <center>
+                                <br>
+                                <p id="p2"> &copy; 2024 Copyright Barber Pro.</p>
+                            
+                        </div>
+                    </div>
+                </footer>
+                <div style="background-color: darkblue; width: 100%; margin: 0 auto; height: 30px;"></div>
+                </center>        
+    
+
+
+                <% } %>
+              
+
+
+
+   
+    
+
+</body>
+
+
+</html>

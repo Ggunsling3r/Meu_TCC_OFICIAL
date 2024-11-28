@@ -1,0 +1,323 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de barbearia</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+   
+
+    <style>
+
+
+
+    #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #A71752;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #la3{
+        font-size: 30px;
+      }
+
+      #la4{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      
+
+
+
+
+    </style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    document.getElementById("cep").addEventListener('input', function() {
+      var cep = this.value.replace(/\D/g, '');
+  
+     
+      if (cep.length === 8) {
+        var url = "https://viacep.com.br/ws/" + cep + "/json/";
+
+        
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            if (!("erro" in data)) {
+             
+              document.getElementById("estado").value = data.uf;
+              document.getElementById("cidade").value = data.localidade;
+              document.getElementById("bairro").value = data.bairro;
+              document.getElementById("rua").value = data.logradouro;
+            } else {
+              alert("CEP não encontrado.");
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao consultar o CEP:', error);
+          });
+      }
+    });
+  });
+</script>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    
+    <%- include('layout/amenu'); %>
+
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Edição do perfil da sua barbearia</h1>
+        </center>
+        <br>
+        <br>
+
+
+        <% dadosBarbearia.forEach(function(dados) { %>
+
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+        
+              <form enctype="multipart/form-data" action="/fazedicaob/<%=dados.id %>" method="POST">
+
+                <div class="mb-3">
+                <label for="nome"  id="la1" class="form-label"><i class="material-icons">badge</i>Nome da barbearia</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Nome" required value= "<%=dados.nome %>" id="nome" name="nome">
+                </div>
+
+                <div class="mb-3">
+                <label for="telefone"  id="la1" class="form-label"><i class="material-icons">phone</i>Telefone da barbearia</label>
+                <input type="tel" style="border-color: #A71752;" class="form-control" pattern="\(\d{2}\) 9\d{4}-\d{4}" required title="Formato: (51) 91234-5678" placeholder="Telefone" value= "<%=dados.telefone %>" id="telefone" name="telefone">
+                </div>
+
+                <div class="mb-3">
+                <label for="cep"  id="la1" class="form-label"><i class="material-icons">home</i>CEP</label>
+                <input type="text" style="border-color: #A71752;" pattern="\d{5}-\d{3}" title="Formato: 05407-002" class="form-control" required placeholder="Cep" value= "<%=dados.cep %>" id="cep" name="cep">
+                </div>
+
+                <div class="mb-3">
+                  <label for="estado" id="la1" class="form-label"><i class="material-icons">location_city</i>Estado</label>
+                  <select id="estado" name="estado" class="form-control" style="border-color: #A71752;" required>
+                    <option value="" disabled>Selecione o estado</option>
+                    <option value="AC" <%= dados.estado == 'AC' ? 'selected' : '' %>>Acre (AC)</option>
+                    <option value="AL" <%= dados.estado == 'AL' ? 'selected' : '' %>>Alagoas (AL)</option>
+                    <option value="AP" <%= dados.estado == 'AP' ? 'selected' : '' %>>Amapá (AP)</option>
+                    <option value="AM" <%= dados.estado == 'AM' ? 'selected' : '' %>>Amazonas (AM)</option>
+                    <option value="BA" <%= dados.estado == 'BA' ? 'selected' : '' %>>Bahia (BA)</option>
+                    <option value="CE" <%= dados.estado == 'CE' ? 'selected' : '' %>>Ceará (CE)</option>
+                    <option value="DF" <%= dados.estado == 'DF' ? 'selected' : '' %>>Distrito Federal (DF)</option>
+                    <option value="ES" <%= dados.estado == 'ES' ? 'selected' : '' %>>Espírito Santo (ES)</option>
+                    <option value="GO" <%= dados.estado == 'GO' ? 'selected' : '' %>>Goiás (GO)</option>
+                    <option value="MA" <%= dados.estado == 'MA' ? 'selected' : '' %>>Maranhão (MA)</option>
+                    <option value="MT" <%= dados.estado == 'MT' ? 'selected' : '' %>>Mato Grosso (MT)</option>
+                    <option value="MS" <%= dados.estado == 'MS' ? 'selected' : '' %>>Mato Grosso do Sul (MS)</option>
+                    <option value="MG" <%= dados.estado == 'MG' ? 'selected' : '' %>>Minas Gerais (MG)</option>
+                    <option value="PA" <%= dados.estado == 'PA' ? 'selected' : '' %>>Pará (PA)</option>
+                    <option value="PB" <%= dados.estado == 'PB' ? 'selected' : '' %>>Paraíba (PB)</option>
+                    <option value="PR" <%= dados.estado == 'PR' ? 'selected' : '' %>>Paraná (PR)</option>
+                    <option value="PE" <%= dados.estado == 'PE' ? 'selected' : '' %>>Pernambuco (PE)</option>
+                    <option value="PI" <%= dados.estado == 'PI' ? 'selected' : '' %>>Piauí (PI)</option>
+                    <option value="RJ" <%= dados.estado == 'RJ' ? 'selected' : '' %>>Rio de Janeiro (RJ)</option>
+                    <option value="RN" <%= dados.estado == 'RN' ? 'selected' : '' %>>Rio Grande do Norte (RN)</option>
+                    <option value="RS" <%= dados.estado == 'RS' ? 'selected' : '' %>>Rio Grande do Sul (RS)</option>
+                    <option value="RO" <%= dados.estado == 'RO' ? 'selected' : '' %>>Rondônia (RO)</option>
+                    <option value="RR" <%= dados.estado == 'RR' ? 'selected' : '' %>>Roraima (RR)</option>
+                    <option value="SC" <%= dados.estado == 'SC' ? 'selected' : '' %>>Santa Catarina (SC)</option>
+                    <option value="SP" <%= dados.estado == 'SP' ? 'selected' : '' %>>São Paulo (SP)</option>
+                    <option value="SE" <%= dados.estado == 'SE' ? 'selected' : '' %>>Sergipe (SE)</option>
+                    <option value="TO" <%= dados.estado == 'TO' ? 'selected' : '' %>>Tocantins (TO)</option>
+                  </select>
+                </div>
+                
+  
+                  <div class="mb-3">
+                  <label for="cidade"  id="la1" class="form-label"><i class="material-icons">my_location</i>Cidade</label>
+                  <input type="text" style="border-color: #A71752;" class="form-control" required placeholder="Cidade" value= "<%=dados.cidade %>" id="cidade" name="cidade">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="bairro"  id="la1" class="form-label"><i class="material-icons">holiday_village</i>Bairro</label>
+                    <input type="text" style="border-color: #A71752;" class="form-control" required placeholder="Bairro" value= "<%=dados.bairro %>" id="bairro" name="bairro">
+                    </div>
+
+                <div class="mb-3">
+                <label for="rua"  id="la1" class="form-label"><i class="material-icons">location_on</i>Rua da barbearia</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" required placeholder="Rua" value= "<%=dados.rua %>" id="rua" name="rua">
+                </div>
+
+                <div class="mb-3">
+                <label for="numero"  id="la1" class="form-label"><i class="material-icons">format_list_numbered</i>Número</label>
+                <input type="number" style="border-color: #A71752;" class="form-control" required placeholder="Número" value= "<%=dados.numero %>" id="numero" name="numero">
+                </div>
+
+              
+
+                <div class="mb-3">
+                <label for="horaAbre"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que a barbearia abre</label>
+                <input type="time" style="border-color: #A71752;" class="form-control" required placeholder="Horário" value= "<%=dados.horaAbre %>" id="horaAbre" name="horaAbre">
+                </div>
+
+                <div class="mb-3">
+                <label for="horaFecha"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que a barbearia fecha</label>
+                <input type="time" style="border-color: #A71752;" class="form-control" required placeholder="Horário" value= "<%=dados.horaFecha %>" id="horaFecha" name="horaFecha">
+                </div>
+
+                <div class="mb-3">
+                <label for="adicional"  id="la1" class="form-label"><i class="material-icons">info</i>Informação adicional</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Facebook, Instagram, etc..." value= "<%=dados.adicional %>" id="adicional" name="adicional">
+                </div>
+                
+
+                <div class="mb-3">
+                    <label for="imagem"  id="la4" class="form-label"><i class="material-icons">image</i>Foto da capa da barbearia</label>
+                    <input type="file" style="border-color: #A71752;" class="form-control"  id="imagem" name="imagem" >
+                </div>
+
+                
+
+              
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Editar</button>
+                    </center>
+                    <br><br>
+
+                    <%  }) %>
+
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+
+</html>
+
+
+
+
+

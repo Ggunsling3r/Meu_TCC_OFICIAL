@@ -1,0 +1,443 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus agendamentos</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        
+
+        #caixa{
+          width: 100%; 
+          max-width: 350px;
+          background-color: #000080; 
+          border: none; 
+          margin: 15px; 
+          border-radius: 15px; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          
+        }
+
+       
+
+
+        
+
+
+        #l{
+          width: 270px;
+          border-radius: 15px; 
+          float: left;
+        }
+
+        #b4{
+          left: 100%;
+          background-color: #00008B;
+          color: white;
+          border-color: #00008B;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #b4:hover {
+            background-color: blue;
+            border-radius: 8px;
+            border-color: blue;
+        }
+
+
+        #b3{
+          background-color: #A71752;
+          color: white;
+          border-color: #A71752;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #btf{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 28px;
+      }
+
+      #btf:hover{
+        background-color: green;
+      }
+
+        
+      .info-conteudo {
+          padding-left: 15px; /* Adiciona espaçamento à esquerda */
+        }
+
+
+    
+
+        
+
+        
+
+
+
+
+       
+
+
+
+
+    </style>
+
+
+<script>
+  function formatarData(data, horario) {
+      const diasSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+      const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+      const date = new Date(data);
+      const diaSemana = diasSemana[date.getDay()];
+      const dia = date.getDate();
+      const mes = meses[date.getMonth()];
+      const ano = date.getFullYear();
+
+      const [horas, minutos] = horario.split(':');
+      const horarioFormatado = `${horas}:${minutos}`;
+
+      return `${diaSemana} dia ${dia} de ${mes} de ${ano} às ${horarioFormatado}`;
+  }
+
+  window.onload = function() {
+      const elementosData = document.querySelectorAll('.data-agendamento');
+      elementosData.forEach(elemento => {
+          const data = elemento.getAttribute('data-data');
+          const horario = elemento.getAttribute('data-horario');
+          const dataFormatada = formatarData(data, horario);
+          elemento.innerHTML = `<center> <p style=" font-size: 25px;" > <b> Data do agendamento: </b><br>${dataFormatada} </p> </center> `;
+
+
+
+      });
+
+
+          // Obter o status do elemento (ou do servidor, se preferir)
+          const statusElemento = elemento.nextElementSibling;
+
+          // Ajustar a data para o horário correto em UTC
+          dataAgendamento.setUTCHours(dataAgendamento.getUTCHours());
+          dataAgendamento.setUTCMinutes(dataAgendamento.getUTCMinutes());
+          dataAgendamento.setUTCSeconds(0); // Opcional, definir segundos como zero
+
+          const status = agora > dataAgendamento ? 1 : 0;
+
+          if (status === 0) {
+              statusElemento.innerHTML = '<p style="color: red; font-size: 28px;"><i class="material-icons">event_busy</i>A OCORRER</p>';
+          } else {
+              statusElemento.innerHTML = '<p style="color: green; font-size: 28px;"><i class="material-icons">event_available</i>AGENDAMENTO CONCLUÍDO</p>';
+          }
+
+  }
+
+
+
+
+        
+
+
+</script>
+
+
+
+</head>
+
+
+
+<body>
+
+
+  <%- include('layout/amenu'); %>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkblue; height: 130px;">
+    
+
+  
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+
+ 
+
+
+        <% if (dadosagendamento.length > 0) { %>
+
+       
+        <label class="navbar-brand" style="color: white; font-size: 20px;"><i class="material-icons">search</i>Filtros: </label>
+
+        </li> &nbsp; &nbsp;
+        
+        <center>
+
+         
+          <form action="/filtraragen-user/" method="GET" class="form-inline">
+            <label style="color: white; font-size: 20px;">
+                <i class="material-icons">calendar_month</i>Status:
+            </label>
+            <select name="status" required>
+                <option value="" disabled selected>Selecione um status</option>
+                <option value="0">Agendamentos não concluídos</option>
+                <option value="1">Agendamentos concluídos</option>
+            </select>
+            <button type="submit" id="btf" class="btn btn-primary">Filtrar</button>
+        </form>
+
+
+
+          </center>
+
+      </ul>
+      
+
+      </div>
+</div>    
+
+
+</nav>
+
+
+<br><br><br>
+
+
+<% } else if(aviso == "Nenhum agendamento encontrado para o status selecionado" ) { %>
+
+
+</div>
+
+</div> 
+
+</nav>
+
+<br><br><br>
+
+
+
+<center>
+  <h1 id="he">Meus agendamentos</h1>
+</center>
+
+<br><br>
+
+  <center>
+  <h3 class="alert alert-warning" role="alert"><%= aviso %></h3>
+ 
+  <button onclick="window.history.back()" id="btf" class="btn btn-secondary">Voltar</button>
+
+</center> 
+
+
+    
+<% } %>
+
+
+</nav>
+
+
+  <article id="a2">
+
+
+    <% if (dadosagendamento.length > 0) { %>
+
+
+      
+<br><br>
+
+<center>
+    <h1 id="he">Meus agendamentos</h1>
+</center>
+
+<br><br>
+
+
+      <div class="row row-cols-md-3 g-4 mx-auto">
+
+
+          <% dadosagendamento.forEach(function(dados) { %>
+
+              <div class="card" id="caixa">
+
+                  <div class="card" style="border-radius: 16px;">
+
+                    
+
+                    
+                    <hr>
+                    <p class="data-agendamento" data-data="<%= dados.data_agendamento %>" data-horario="<%= dados.horario_agendamento %>">  </p>
+                    <hr>
+
+
+                    <br>
+
+                    <div class="info-conteudo">
+                      <p> <b>Nome do cliente: </b><%= dados.nome_cliente %></p>
+                      <p><b>Telefone do cliente: </b><%= dados.telefone_cliente %></p>
+                      <p><b>Nome do profissional: </b><%= dados.nome_profissional %></p>
+                      <p><b>Nome do serviço: </b><%= dados.nome_servico %></p>
+                      <p><b>Preço do serviço: </b>R$ <%= dados.preco_servico.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %></p>
+                      <p><b>Duração do serviço: </b><%= dados.duracao_servico %> minutos</p>
+                      </div>
+                      
+
+
+                      <center>
+
+                       
+                        <% if (dados.status_agendamento === 1) { %>
+
+                          <hr>
+                          <p style="color: green; font-size: 28px;"><i class="material-icons">event_available</i>AGENDAMENTO CONCLUÍDO</p>
+                          <hr> <br>
+                          <a class="btn btn-primary" id="b4" href="/dagenda/<%= dados.id_agendamento %>" style="float: center; width: 60%;" role="button"><i class="material-icons">info</i>Mais detalhes</a><br><br>
+
+                         
+
+                      <% } else { %>
+
+                        <hr>
+                        <p style="color: red; font-size: 28px;"><i class="material-icons">event_busy</i>PENDENTE</p>
+                        <hr> <br>
+                                              
+                    <a class="btn btn-primary" id="b4" href="/dagenda/<%= dados.id_agendamento %>" style="float: center; width: 60%;" role="button"><i class="material-icons">info</i>Mais detalhes</a><br><br>
+                    
+                    <a class="dropdown-item" data-bs-toggle="modal" id="b3" style="float: center; width: 60%;"  data-bs-target="#exampleModal<%= dados.id_agendamento %>"><i class="material-icons">close</i>CANCELAR</a><br><br>
+                    
+
+
+                      <% } %>
+
+                     
+
+                      
+
+
+              <div class="modal fade" id="exampleModal<%= dados.id_agendamento %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">CANCELAR AGENDAMENTO</h5>
+                      <a  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                    </div>
+                    <div class="modal-body">
+                      <h5>Tem certeza de que deseja cancelar seu agendamento?</h5>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <a href="/apagaragen/<%= dados.id_agendamento %>" id="bt11" class="btn btn-primary">Sim</a>
+                      <a href="/" id="bt22" class="btn btn-primary">Não</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+                    
+
+                  </center>
+
+
+                  </div>
+                  <br>
+                </div>
+
+              
+
+          <% }) %>
+      </div>
+
+      
+      <%  } else if (aviso == "Você não tem nenhum agendamento!") { %>
+
+        <br><br><br>
+
+        <center>
+       
+        <h3 class="alert alert-warning" role="alert"><%= aviso %></h3>
+             
+              <button onclick="window.history.back()" id="btf" class="btn btn-secondary">Voltar</button>
+
+        </center>
+
+
+   
+
+
+    <%  } %>
+          
+    
+
+  </article>
+
+  <br><br><br><br><br><br>
+
+  <%- include('layout/footer'); %>
+
+    
+</body>
+
+
+
+</html>

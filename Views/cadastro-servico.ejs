@@ -1,0 +1,206 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de serviço</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+
+    <style>
+
+
+
+
+#ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #A71752;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+     
+
+      
+
+      
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    
+    <%- include('layout/amenu'); %>
+
+   
+
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Faça o cadastro de um serviço!</h1>
+        </center>
+        <br>
+        <br>
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+
+              
+              <form enctype="multipart/form-data" action="/cadastrarser/<%= (bid) %> " method="POST">
+                
+          
+                 
+
+                <div class="mb-3">
+                <label for="nome"  id="la1" class="form-label"><i class="material-icons">badge</i>Nome do serviço</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Nome" required id="nome" name="nome">
+                </div>
+
+
+                <div class="mb-3">
+                <label for="tempo"  id="la1" class="form-label"><i class="material-icons">schedule</i>tempo de duração do serviço</label>
+                <select id="tempo" name="tempo" required class="form-select" style="width: 300px; border-color: #A71752; " >
+                  <option disabled selected id="o"></option>
+                  <option id="o" value="15"> 15 minutos</option>
+                  <option id="o" value="30">30 minutos</option>
+                  <option id="o" value="60">1 hora</option>
+                  <option id="o" value="90">1 hora e 30 minutos</option>
+                  <option id="o" value="120">2 horas</option>
+                  <option id="o" value="150">2 horas e 30 minutos</option>
+                  <option id="o" value="180">3 horas</option>
+                </select>
+                </div>
+
+                
+                <div class="mb-3">
+                <label for="preco" id="la1" class="form-label"><i class="material-icons">paid</i>Preço</label>
+                <input type="number" style="border-color: #A71752;" step="0.01" placeholder="Preço do serviço" class="form-control" required name="preco" id="preco">
+                </div>
+
+
+                <div class="mb-3">
+                <label for="profile"  id="la1" class="form-label"><i class="material-icons">image</i>Foto do serviço</label>
+                <input type="file" style="border-color: #A71752;" class="form-control" required id="profile" name="nomeimg" >
+                </div>
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
+                    <br><br>
+              </form>
+        
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

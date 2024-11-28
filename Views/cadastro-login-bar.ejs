@@ -1,0 +1,340 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de barbearia</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+   
+
+    <style>
+
+
+
+    #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #A71752;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #la3{
+        font-size: 30px;
+      }
+
+      #la4{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      
+
+
+
+
+    </style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    document.getElementById("cep").addEventListener('input', function() {
+      var cep = this.value.replace(/\D/g, '');
+  
+     
+      if (cep.length === 8) {
+        var url = "https://viacep.com.br/ws/" + cep + "/json/";
+
+        
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            if (!("erro" in data)) {
+             
+              document.getElementById("estado").value = data.uf;
+              document.getElementById("cidade").value = data.localidade;
+              document.getElementById("bairro").value = data.bairro;
+              document.getElementById("rua").value = data.logradouro;
+            } else {
+              alert("CEP não encontrado.");
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao consultar o CEP:', error);
+          });
+      }
+    });
+  });
+
+
+
+function validateFiles(input, errorId) {
+    const fileError = document.getElementById(errorId);
+    const files = input.files;
+
+    
+    if (files.length > 4) {
+        fileError.style.display = 'block';
+        input.value = ''; 
+    } else {
+        fileError.style.display = 'none';
+    }
+}
+
+
+
+
+</script>
+
+
+</head>
+
+
+
+<body>
+
+ 
+
+    
+    <%- include('layout/amenu'); %>
+
+    <%  if(aviso == "Já existe um usuário com esse e-mail!") {   %>
+
+      <br><br>
+      <center>
+      <h3 class="alert alert-danger" role="alert"><%= aviso %></h3>
+      </center> 
+  
+    <% } %>
+    
+    <article id="ar1">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px"> 
+        </center>
+        <br>
+        <br>
+      </article>
+
+      <article id="ar2">
+
+
+        <br>
+        <br>
+        
+        <center>
+        <h1 id="he">Faça o cadastro da sua barbearia!</h1>
+        </center>
+        <br>
+        <br>
+
+        <div class="card" id="c">
+          <div class="container">
+            <div class="card container" id="cc">
+              <br><br>
+        
+              <form enctype="multipart/form-data" action="/cadastrarbar" method="POST">
+
+                <div class="mb-3">
+                <label for="nome"  id="la1" class="form-label"><i class="material-icons">badge</i>Nome da barbearia</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Nome" required id="nome" name="nome">
+                </div>
+
+                <div class="mb-3">
+                <label for="telefone"  id="la1" class="form-label"><i class="material-icons">phone</i>Telefone da barbearia</label>
+                <input type="tel" style="border-color: #A71752;" pattern="\(\d{2}\) 9\d{4}-\d{4}" title="Formato: (51) 91234-5678" class="form-control" placeholder="Telefone" required id="telefone" name="telefone">
+                </div>
+
+                <div class="mb-3">
+                <label for="cep"  id="la1" class="form-label"><i class="material-icons">home</i>CEP</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" pattern="\d{5}-\d{3}" title="Formato: 05407-002" placeholder="Cep" required id="cep" name="cep">
+                </div>
+
+                <div class="mb-3">
+                  <label for="estado" id="la1" class="form-label"><i class="material-icons">location_city</i>Estado</label>
+                  <select id="estado" name="estado" class="form-control" style="border-color: #A71752;" required>
+                    <option value="" disabled selected>Selecione o estado</option>
+                    <option value="AC">Acre (AC)</option>
+                    <option value="AL">Alagoas (AL)</option>
+                    <option value="AP">Amapá (AP)</option>
+                    <option value="AM">Amazonas (AM)</option>
+                    <option value="BA">Bahia (BA)</option>
+                    <option value="CE">Ceará (CE)</option>
+                    <option value="DF">Distrito Federal (DF)</option>
+                    <option value="ES">Espírito Santo (ES)</option>
+                    <option value="GO">Goiás (GO)</option>
+                    <option value="MA">Maranhão (MA)</option>
+                    <option value="MT">Mato Grosso (MT)</option>
+                    <option value="MS">Mato Grosso do Sul (MS)</option>
+                    <option value="MG">Minas Gerais (MG)</option>
+                    <option value="PA">Pará (PA)</option>
+                    <option value="PB">Paraíba (PB)</option>
+                    <option value="PR">Paraná (PR)</option>
+                    <option value="PE">Pernambuco (PE)</option>
+                    <option value="PI">Piauí (PI)</option>
+                    <option value="RJ">Rio de Janeiro (RJ)</option>
+                    <option value="RN">Rio Grande do Norte (RN)</option>
+                    <option value="RS">Rio Grande do Sul (RS)</option>
+                    <option value="RO">Rondônia (RO)</option>
+                    <option value="RR">Roraima (RR)</option>
+                    <option value="SC">Santa Catarina (SC)</option>
+                    <option value="SP">São Paulo (SP)</option>
+                    <option value="SE">Sergipe (SE)</option>
+                    <option value="TO">Tocantins (TO)</option>
+                  </select>
+                </div>
+                
+  
+                  <div class="mb-3">
+                  <label for="cidade"  id="la1" class="form-label"><i class="material-icons">my_location</i>Cidade</label>
+                  <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Cidade" required id="cidade" name="cidade">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="bairro"  id="la1" class="form-label"><i class="material-icons">holiday_village</i>Bairro</label>
+                    <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Bairro" required id="bairro" name="bairro">
+                    </div>
+
+                <div class="mb-3">
+                <label for="rua"  id="la1" class="form-label"><i class="material-icons">location_on</i>Rua</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Rua" required id="rua" name="rua">
+                </div>
+
+                <div class="mb-3">
+                <label for="numero"  id="la1" class="form-label"><i class="material-icons">format_list_numbered</i>Número</label>
+                <input type="number" style="border-color: #A71752;" class="form-control" placeholder="Número" required id="numero" name="numero">
+                </div>
+
+              
+
+                <div class="mb-3">
+                <label for="horaAbre"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que a barbearia abre</label>
+                <input type="time" style="border-color: #A71752;" class="form-control" placeholder="Horário" required id="horaAbre" name="horaAbre">
+                </div>
+
+                <div class="mb-3">
+                <label for="horaFecha"  id="la1" class="form-label"><i class="material-icons">schedule</i>Horário em que a barbearia fecha</label>
+                <input type="time" style="border-color: #A71752;" class="form-control" placeholder="Horário" required id="horaFecha" name="horaFecha">
+                </div>
+
+                <div class="mb-3">
+                <label for="adicional"  id="la1" class="form-label"><i class="material-icons">info</i>Informação adicional</label>
+                <input type="text" style="border-color: #A71752;" class="form-control" placeholder="Facebook, Instagram, etc..." id="adicional" name="adicional">
+                </div>
+                
+                <div class="mb-3">
+                <label for="email"  id="la2" class="form-label"><i class="material-icons">mail</i>E-mail</label>
+                <input type="email" style="border-color: #A71752;" class="form-control" required id="email" name="email" placeholder="nome@exemplo.com" >
+                </div>
+             
+                <div class="mb-3">
+                  <label for="senha"  id="la3" class="form-label"><i class="material-icons">lock</i>Senha</label>
+                  <input type="password" style="border-color: #A71752;" class="form-control" placeholder="Crie uma senha" required name="senha" id="senha">
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile"  id="la4" class="form-label"><i class="material-icons">image</i>Foto da capa da barbearia</label>
+                    <input type="file" style="border-color: #A71752;" class="form-control" required id="profile" name="nomeimg" >
+                </div>
+
+                <div class="mb-3">
+                  <label for="interior"  id="la4" class="form-label"><i class="material-icons">image</i>Fotos do interior barbearia</label>
+                  <input type="file" style="border-color: #A71752;" class="form-control" required id="interior" name="nomeimginterior" multiple accept="image/*" onchange="validateFiles(this, 'cadastroError')">
+                  <div id="cadastroError" style="color: red; display: none;">Por favor, selecione até 4 imagens.</div>
+              </div>
+                
+               
+                    <br><br>
+                    <center>
+                  <button id="btnlog" type="submit" class="btn btn-primary">Cadastrar</button>
+                    </center>
+                    <br><br>
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+      </article>
+
+      <article id="ar3">
+        <br>
+        <br>
+        <br><br><br><br>
+        <center>
+        <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+        </center>
+        <br>
+        <br>
+      </article>
+    
+
+      <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

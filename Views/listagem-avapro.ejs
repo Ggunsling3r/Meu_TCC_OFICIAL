@@ -1,0 +1,317 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações do profissional</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        
+
+        #caixa{
+          width: 18rem; 
+          background-color: #000080; 
+          border: none; 
+          margin: 15px; 
+          border-radius: 15px; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          
+        }
+
+        #l{
+          width: 270px;
+          border-radius: 15px; 
+          float: left;
+        }
+
+        #b3{
+          background-color: darkgreen;
+          color: white;
+          border-color: darkgreen;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+
+    
+        #b5{
+          background-color: maroon;
+          color: white;
+          border-color: maroon;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b5:hover {
+            background-color: firebrick;
+            border-radius: 8px;
+            border-color: firebrick;
+        }
+
+
+        #btf{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 28px;
+      }
+
+      #btf:hover{
+        background-color: green;
+      }
+        
+
+        
+
+
+
+
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+
+    
+    
+
+
+    <article id="a1"></article>
+
+
+    <article id="a2">
+        <br><br><br>
+
+
+        <center>
+
+
+          <% if (dadosava.length > 0) { %>
+
+
+           
+                <img src="/imagesPro/<%= dadosava[0].imagem_profissional %>" alt="Imagem do profissional" style="width: 170; height: 140px;">
+                <h2>Avaliações de <%= dadosava[0].nome_profissional %></h2>
+            
+            
+          </center>
+
+          <br><br>
+
+          <%  } %>
+
+          
+
+          
+    
+    
+        <% if (dadosava.length > 0) { %>
+          
+          
+          <% dadosava.forEach(function(dados) { %>
+
+
+            <% if(dados.fk_id_usuario == null || dados.fk_id_usuario === undefined ) {  %>
+
+
+              <div class="avaliacao" style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; word-wrap: break-word; overflow-wrap: break-word;">
+                <div style="display: flex; align-items: center;">
+
+                    <img src="/wallpaper/nulo.png" alt="Imagem do usuário" style="border-radius: 50%; width: 50px; height: 50px; margin-right: 10px;">
+                    <strong>Usuário excluído</strong>
+                </div><br>
+                <p><strong>Comentário:</strong> <%= dados.comentario %></p>
+                <p><strong>Nota:</strong> <img src="/estrelas/estrela<%= dados.nota_profissional %>.png" alt="Nota" height="20px"></p>
+
+
+
+                <% if (bid == dados.fk_id_usuario && loggedin ) { %>
+
+                  <br>
+                  <a class="btn btn-danger" id="b5" style="margin-left: 15px;" href="/apagarava/<%= dados.id_nota %> " role="button" ><i class="material-icons">delete</i> Apagar avaliação</a>
+
+                  <%  } else if(nome && boolean == 1) {  %>
+
+                    <br>
+                    <a class="btn btn-danger" id="b5" style="margin-left: 15px;" href="/apagarava/<%= dados.id_nota %> " role="button"  ><i class="material-icons">delete</i> Apagar avaliação</a>
+
+                    <%  } %>
+
+
+
+            </div>
+
+
+
+              <% } else {  %>
+
+
+                <div class="avaliacao" style="border: 1px solid #ccc; padding: 10px; margin: 10px 0; word-wrap: break-word; overflow-wrap: break-word;">
+                  <div style="display: flex; align-items: center;">
+  
+                      <img src="/imagesUser/<%= dados.imagem_usuario %>" alt="Imagem do usuário" style="border-radius: 50%; width: 50px; height: 50px; margin-right: 10px;">
+                      <strong><%= dados.nome_usuario %></strong>
+                  </div><br>
+                  <p><strong>Comentário:</strong> <%= dados.comentario %></p>
+                  <p><strong>Nota:</strong> <img src="/estrelas/estrela<%= dados.nota_profissional %>.png" alt="Nota" height="20px"></p>
+  
+  
+  
+                  <% if (bid == dados.fk_id_usuario && loggedin ) { %>
+  
+                    <br>
+                    <a class="btn btn-danger" id="b5" style="margin-left: 15px;" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>"  role="button" ><i class="material-icons">delete</i> Apagar avaliação</a>
+  
+                    <%  } else if(nome && boolean == 1) {  %>
+  
+                      <br>
+                      <a class="btn btn-danger" id="b5" style="margin-left: 15px;" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>"  role="button"  ><i class="material-icons">delete</i> Apagar avaliação</a>
+  
+                      <%  } %>
+  
+  
+  
+              </div>
+
+
+
+                <%  } %>
+
+
+
+                <div class="modal fade" id="exampleModal<%= dados.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apagar avaliação</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h5>Tem certeza de que deseja apagar essa avaliação?</h5>
+                      
+                      </div>
+
+                      
+
+                      <div class="modal-footer d-flex justify-content-center">
+                        <a href="/apagarava/<%= dados.id_nota %>" id="bt11" class="btn btn-primary">Sim</a>
+                        <button type="button" id="bt22" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                      </div>
+
+                      
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+           
+        <% }); %>
+
+
+        
+      <% } else { %>
+          <br>
+          <center>
+              <h3 class="alert alert-warning" role="alert">Nenhuma avaliação foi feita para esse profissional ainda!</h3>
+
+              <button onclick="window.history.back()" id="btf" class="btn btn-secondary">Voltar</button>
+
+          </center>
+      <% } %>
+    </article>
+    
+
+      <article id="a3"></article>
+
+
+
+
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

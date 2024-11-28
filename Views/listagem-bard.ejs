@@ -1,0 +1,425 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da barbearias</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+   
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        #b{
+          background-color: darkred;
+          color: white;
+          border-color: darkred;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #b:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+        #b2{
+          background-color: darkgoldenrod;
+          color: white;
+          border-color: darkgoldenrod;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: goldenrod;
+            border-radius: 8px;
+            border-color: goldenrod;
+        }
+
+        #b3{
+          background-color: darkgreen;
+          color: white;
+          border-color: darkgreen;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+        #b4{
+          background-color: #A71752;
+          color: white;
+          border-color: #A71752;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b4:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #b5{
+          background-color: black;
+          color: white;
+          border-color: black;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b5:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #bd{
+          left: 100%;
+          background-color: darkred;
+          color: white;
+          border-color: darkred;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #bd:hover {
+            background-color: green;
+            border-radius: 8px;
+            border-color: green;
+        }
+
+        #btnmaps{
+          left: 100%;
+          background-color: navy;
+          color: white;
+          border-color: navy;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #btnmaps:hover {
+            background-color: darkblue;
+            border-radius: 8px;
+            border-color: darkblue;
+        }
+
+
+        select{
+          cursor: pointer;
+        }
+
+
+        #a1{
+        width: 35%;
+        height: 370px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #a2{
+        width: 30%;
+        height: 370px;
+        background-color: white;
+        float: left;
+      }
+
+      #a3{
+        width: 35%;
+        height: 370px;
+        background-color: white;
+        float: right;
+      }
+
+
+
+      #b6{
+          background-color: darkorange;
+          color: white;
+          border-color: darkorange;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b6:hover {
+            background-color: orange;
+            border-radius: 8px;
+            border-color: orange;
+        }
+
+
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+    
+    <br><br><br>
+        
+    <center>
+        <% dadosBarbearia.forEach(function(dados) { %>
+
+          <% if(loggedi && bid == dados.id ) {  %>
+
+            <h1 id="he">Perfil da sua barbearia </h1>
+          </center>
+          <br>
+          <br>
+
+            <%  } else {  %>
+
+              <h1 id="he">Detalhes da barbearia <%=dados.nome%></h1>
+            </center>
+            <br>
+            <br>
+
+              <%  } %>
+
+   
+
+
+    <article id="a1"></article>
+
+
+    <article id="a2">
+
+    <div class="card" style="border-color: black; ">
+
+       
+
+
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Imagem da capa -->
+          <div class="carousel-item active">
+            <img src="/imagesBar/<%= dadosBarbearia[0].imagem %>" height="466px" width="559px" class="d-block w-100" alt="Imagem da capa">
+          </div>
+      
+          <!-- Imagens do interior -->
+          <% dadosBarbearia[0].imagens_interior.forEach((imagem, index) => { %>
+            <div class="carousel-item <%= index === 0 && dadosBarbearia.length > 1 ? 'active' : '' %>">
+              <img src="/interiorBar/<%= imagem %>" height="466px" width="559px" class="d-block w-100" alt="Imagem do interior">
+            </div>
+          <% }); %>
+        </div>
+      
+        <!-- Controles do carrossel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+
+        <div class="card-body">
+          <h5 class="card-title"><b><%=dados.nome%></b></h5>
+          <p class="card-text">| Telefone:   <b><%=dados.telefone%></b>  |  E-mail:   <b><%=dados.email%></b> | </p>
+          
+          <% if(dados.adicional == null) {  %>
+
+            <% } else if(dados.adicional == '') {  %>
+
+
+            <% } else {  %>
+
+              <p class="card-text">| Adicional:   <b><%=dados.adicional%></b> | </p>
+
+              <%  } %>
+
+        </div>
+
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> Estado: <b><%=dados.estado%></b></li>
+          <li class="list-group-item"> Cidade: <b><%=dados.cidade%></b></li>
+          <li class="list-group-item"> Bairro: <b><%=dados.bairro%></b></li>
+          <li class="list-group-item"> Rua: <b><%=dados.rua%></b> &nbsp;&nbsp; N°: <b> <%=dados.numero%> </b></li>
+          <li class="list-group-item"> Abre às <b><%=dados.horaAbre.substring(0, 5)%></b> e fecha às <b><%=dados.horaFecha.substring(0, 5)%></b></li>
+
+          <li class="list-group-item"> 
+            
+            <center>
+
+            <a class="btn btn-primary" id="b2" href="/avabar/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Ver avaliações</a>
+            <a class="btn btn-primary" id="b4" href="/listagem-probar/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">group</i>Profissionais</a>
+            <a class="btn btn-primary" id="b3" href="/listagem-serbar/ <%= dados.id %> " style="float: center;" role="button"><i class="material-icons">paid</i>Serviços/preços</a>
+         
+            <br><br>
+
+            </center>
+
+            <% if(nome && loggedin && boolean == 0 ) {  %>
+
+              <center>
+
+            <a class="btn btn-primary" id="b5" href="/cadastro-avabar/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Fazer uma avaliação</a>
+
+            </center>
+
+            <%   } %>
+
+            <% if(loggedi && bid == dados.id ) {  %>
+
+              <center>
+
+                <a class="btn btn-primary" id="b6" href="/editarb/<%=dados.id %>" style="float: center;" role="button"><i class="material-icons">edit</i>Editar perfil</a>
+                <a class="btn btn-primary" id="b6" href="/editarimg/<%=dados.id %>" style="float: center;" role="button"><i class="material-icons">edit</i>Editar fotos do interior</a>
+    
+
+              </center>
+
+              <% }  %>
+
+            <br><br>
+
+            <h3>Localização da barbearia no mapa</h3>
+
+            <div id="map" style="height: 300px; width: 100%;"></div>
+            <div id="address-details" style="display: none;">
+                <p id="address"></p>
+                <div id="message"></div>
+            </div>
+            
+        </li>
+        </ul>
+
+      </article>
+
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br>
+
+
+     
+
+
+
+      <article id="a3"></article>
+
+
+      <% }) %>
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+<% dadosBarbearia.forEach(function(dados) { %>
+  
+  
+  <script>
+    function initMap() {
+            var map = L.map('map').setView([0, 0], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            var endereco = ' <%= dados.rua %>, <%= dados.cidade %>, <%= dados.estado %>, Brasil';
+
+            var geocoder = L.Control.Geocoder.nominatim();
+
+            geocoder.geocode(endereco, function(results) {
+                if (results.length > 0) {
+                    var result = results[0];
+
+                    console.log('Coordenadas encontradas:', result.center);
+
+                    map.setView(result.center, 16);
+
+                    L.marker(result.center).addTo(map)
+                        .bindPopup('Endereço: ' + endereco)
+                        .openPopup();
+                } else {
+                    console.log('Nenhum resultado encontrado para o endereço:', endereco);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initMap);
+</script>
+
+
+
+
+<% }); %>
+
+</html>

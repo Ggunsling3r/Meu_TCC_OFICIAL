@@ -1,0 +1,448 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profissionais da barbearia</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        
+
+        #caixa{
+          width: 20rem; 
+          background-color: #000080; 
+          border: none; 
+          margin: 15px; 
+          border-radius: 15px; 
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          
+        }
+
+
+        #l{
+          width: 290px;
+          border-radius: 15px; 
+          float: left;
+        }
+
+        
+
+        #b{
+          background-color: #A71752;
+          color: white;
+          border-color: #A71752;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        #b2{
+          background-color: darkorange;
+          color: white;
+          border-color: darkorange;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b2:hover {
+            background-color: darkgoldenrod;
+            border-radius: 8px;
+            border-color: darkgoldenrod;
+        }
+
+
+        #b3{
+          background-color: darkgoldenrod;
+          color: white;
+          border-color: darkgoldenrod;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: goldenrod;
+            border-radius: 8px;
+            border-color: goldenrod;
+        }
+
+        
+
+
+        #btf{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 28px;
+      }
+
+      #btf:hover{
+        background-color: green;
+      }
+
+      #b5{
+          background-color: black;
+          color: white;
+          border-color: black;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b5:hover {
+            background-color: darkred;
+            border-radius: 8px;
+            border-color: darkred;
+        }
+
+
+        
+
+        
+
+
+
+
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+    
+
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkblue; height: 130px;">
+            
+      
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+
+
+           
+          
+              
+              <% if (dadosprofissional.length > 0) { %>
+
+                <label class="navbar-brand" style="color: white; font-size: 20px;"><i class="material-icons">search</i>Filtros: </label>
+
+                &nbsp; &nbsp;
+               
+
+                <center>
+                  <form action="/filtrarpro/<%= dadosprofissional[0].fk_id %>" method="POST" class="form-inline">
+
+                      <label style="color: white; font-size: 20px;"><i class="material-icons">work</i>Serviços:
+                          <select  name="servicoId" required >
+                            <option value="" disabled selected>Selecione um serviço</option>
+
+                              <% if (dadosservico && dadosservico.length > 0) { %>
+                                  <% dadosservico.forEach(function(servico) { %>
+                                      <option value="<%= servico.id %>"><%= servico.nome %></option>
+                                  <% }); %>
+                              <% } %>
+                          </select>
+                      </label>
+                      
+
+                      <button type="submit" id="btf" class="btn btn-primary">Filtrar</button>
+
+                  </form>
+
+
+              </center>
+
+
+          </ul>
+          
+
+          </div>
+  
+        </div> 
+
+        </nav>
+
+
+            <% } else if(aviso) { %>
+
+      
+
+            </div>
+  
+          </div> 
+  
+          </nav>
+
+          <br><br><br>
+
+              <center>
+              <h3 class="alert alert-warning" role="alert"><%= aviso %></h3>
+             
+              <button onclick="window.history.back()" id="btf" class="btn btn-secondary">Voltar</button>
+
+            </center> 
+
+
+                
+            <% } %>
+
+              
+             
+
+  
+        
+
+
+
+
+    <article id="a1"></article>
+
+
+    <article id="a2">
+
+
+      
+
+        <% if (dadosprofissional.length > 0) { %>
+
+          <br><br><br>
+        
+          <center>
+            <h1 id="he">Profissionais da <%= nome_bar %></h1>
+          </center>
+          <br>
+          <br>
+          <br>
+
+          <% if (aviso) { %>
+            <div class="alert alert-warning" role="alert">
+                <%= aviso %>
+            </div>
+        <% } %>
+
+
+
+         
+              
+        <div class="row row-cols-md-3 g-4 mx-auto">
+
+          <% dadosprofissional.forEach(function(dados) { %>
+
+              <div class="card" id="caixa">
+                <br>
+                  <img src="/imagesPro/<%=dados.imagem %>" class="card-img-top" alt="erro na imagem" height="300em" width="100%">
+
+                  <br>
+
+                  <div class="card" style="border-radius: 16px;" >
+
+                    
+
+                      <ul  class="list-group list-group-flush">
+
+                        <li id="l" class="list-group-item" > 
+                          <h5 class="card-title"><%= dados.nome %></h5>
+                         
+                          
+                            
+                           <p style="font-size: 20px;"> Trabalha das  <b> <%= dados.horaComeca.substring(0, 5) %> às <%= dados.horaTermina.substring(0, 5) %></b></p>
+                            
+                            <hr>
+
+                            <p style="font-size: 25px;">Serviços que realiza:</p>
+                            <% if (dados.servico && dados.servico.trim() !== '') { %>
+                                <% let servicos = dados.servico.split(','); %>
+                                <% servicos.forEach(function(servico) { %>
+                                    <b><%= servico.trim() %></b><br>
+                                <% }); %>
+                            <% } else { %>
+                                <p style="color: #A71752;" ><b>Este profissional não realiza serviços atualmente.</b></p>
+                            <% } %>
+
+
+                              <hr>
+
+
+                              
+                              <p class="card-text" style="font-size: 20px; margin-left: 15px;"><b>Estrelas: </b>
+                                  <% 
+                                  const estrelas = dados.media === 0 ? 0 : Math.round(dados.media); 
+                                  const estrelaSrc = `/estrelas/estrela${estrelas}.png`; 
+                                  %>
+                                  <img src="<%= estrelaSrc %>" alt="Nota" height="28px" />
+                              </p>
+
+                          <hr>
+                         
+
+                          <% if (bid == dados.fk_id && loggedi) { %>
+
+                            <a class="btn btn-primary" id="b2" href="/editarp/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">edit</i>Editar</a>
+                            <a class="btn btn-primary" id="b" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">delete</i>Apagar</a><br><br>
+                            <a class="btn btn-primary" id="b3" href="/avapro/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Ver Avaliações</a>
+
+                            
+                          </li>
+
+                          <% } else if(nome) {  %>
+
+                            
+                            <a class="btn btn-primary" id="b3" href="/avapro/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Ver Avaliações</a> <br><br>
+
+                            <% if(nome && loggedin && boolean == 0 ) {  %>
+
+                              <a class="btn btn-primary" id="b5" href="/cadastro-avapro/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Fazer uma avaliação</a> <br><br>
+                  
+                              <%   } %>
+
+                            
+                            <a class="btn btn-primary" id="b" href="/ragendar/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">calendar_today</i>Agendar</a> <br>
+
+                          </li>
+
+                            <% } else {  %>
+
+                              <a class="btn btn-primary" id="b3" href="/avapro/<%= dados.id %>" style="float: center;" role="button"><i class="material-icons">star</i>Avaliações</a>
+                            </li>
+
+                            <% } %>
+
+                        
+
+                            <div class="modal fade" id="exampleModal<%= dados.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Apagar profissional da plataforma</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h5>Tem certeza de que deseja apagar esse profissional?</h5>
+                                  
+                                  </div>
+            
+                                  
+          
+                                  <div class="modal-footer d-flex justify-content-center">
+                                    <a href="/apagarp/<%= dados.id %>" id="bt11" class="btn btn-primary">Sim</a>
+                                    <button type="button" id="bt22" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                  </div>
+            
+                                  
+            
+                                </div>
+                              </div>
+                            </div>
+
+                            
+
+
+
+                      </ul>
+                        
+                  </div>
+                  <br>
+              </div>
+
+              <br>
+
+              
+          <% }) %>
+      </div>
+
+
+      <%  } %>
+          
+    
+        
+    </div>
+    
+
+      
+  
+
+
+        
+
+    
+
+      </article>
+
+      <article id="a3"></article>
+
+
+
+
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>

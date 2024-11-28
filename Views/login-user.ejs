@@ -1,0 +1,190 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de cliente</title>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+
+    <style>
+
+
+      #ar1{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: left;
+        margin-left: 0%;
+      }
+
+      #ar2{
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        float: left;
+      }
+
+      #ar3{
+        width: 25%;
+        height: 500px;
+        background-color: white;
+        float: right;
+      }
+
+      #c{
+        background-color: #000080;
+      }
+
+      #la1{
+        font-size: 30px;
+      }
+
+      #la2{
+        font-size: 30px;
+      }
+
+      #btnlog{
+        background-color: darkred;
+        border-color: white;
+      }
+
+      #btnlog:hover{
+        background-color: green;
+      }
+
+      
+
+
+
+
+
+       
+
+    </style>
+
+
+
+</head>
+
+
+
+<body>
+
+
+    
+    <%- include('layout/amenu'); %>
+
+   
+   
+      <% if(aviso == "Cadastro de usuário realizado com sucesso!") { %>
+        <br><br>
+        <center>
+        <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+        </center>
+      <% } else if (aviso == "E-mail não encontrado" || aviso == "Senha inválida"){ %>
+        <br><br>
+        <center>
+        <h3 class="alert alert-dark" role="alert"><%= aviso %></h3>
+        </center>
+      <% } %>
+
+      
+
+        <article id="ar1">
+          <br>
+          <br>
+          <br><br><br><br>
+          <center>
+          <img id="im1" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+          </center>
+          <br>
+          <br>
+        </article>
+
+        <article id="ar2">
+
+
+          <br>
+          <br>
+          
+          <center>
+          <h1 id="he">Fazer login como cliente</h1>
+          </center>
+          <br>
+          <br>
+
+          <div class="card" id="c" >
+            <div class="container">
+              <div class="card container" id="cc">
+                <br><br>
+
+                <center>
+                <img src="/wallpaper/avatar-login.png" alt="erro na imagem" height="200px"><br><br>
+                </center>
+
+          <form action="/logar" method="POST">
+
+            <div class="mb-3">
+              <label for="email" id="la1" class="form-label"><i class="material-icons">mail</i>E-mail</label>
+              <input type="email" required class="form-control" name="email" style="border-color: #000080;" placeholder="nome@exemplo.com" id="email" >
+            </div>
+            <div class="mb-3">
+              <label for="senha" id="la2" class="form-label"><i class="material-icons">lock</i>Senha</label>
+              <input type="password" required class="form-control" name="senha" style="border-color: #000080;" placeholder="Sua senha" id="senha">
+            </div>
+            
+            <br>
+            <br>
+            <center>
+            <button id="btnlog" type="submit" class="btn btn-primary">Entrar</button>
+            </center>
+            Ainda não possui uma conta? <a href="/cadastro-user">Cadastrar</a>
+            <br><br><br>
+          </form>
+
+              </div>
+          </div>
+      </div>
+
+
+        </article>
+
+        <article id="ar3">
+          <br>
+          <br>
+          <br><br><br><br>
+          <center>
+          <img id="im2" src="https://static.wixstatic.com/media/b8c75c_94105ac98dd64bf68d1d47124ac08443~mv2.gif" alt="erro na imagem" width="375px">
+          </center>
+          <br>
+          <br>
+        </article>
+
+    
+
+  
+    <br>
+    <br>
+    <br>
+   <br><br><br><br><br><br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+     <%- include('layout/footer'); %>
+    
+</body>
+
+
+
+</html>

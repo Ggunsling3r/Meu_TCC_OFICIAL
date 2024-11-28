@@ -1,0 +1,410 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de barbearias</title>
+
+    <link rel="shortcut icon" type="imagex/png" href="/wallpaper/so.ico">
+
+    
+
+
+    <style>
+
+      
+      
+      .nav-link{
+            transition-duration: 0.4s;
+            border-radius: 8px;
+        }
+
+        
+       
+        .nav-link:hover {
+            background-color: #696969;
+            border-radius: 8px;
+        }
+
+    
+          .dropdown{
+            right: 70px;
+          }
+
+          .material-icons {
+            vertical-align: middle;
+            margin-right: 7px; 
+        }
+
+        
+
+
+        #bd{
+          left: 100%;
+          background-color: #00008B;
+          color: white;
+          border-color: #00008B;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+    
+        #bd:hover {
+            background-color: blue;
+            border-radius: 8px;
+            border-color: blue;
+        }
+
+
+        select{
+          cursor: pointer;
+        }
+
+
+        #b3{
+          background-color: maroon;
+          color: white;
+          border-color: maroon;
+          transition-duration: 0.4s;
+          border-radius: 8px;
+        }
+
+        #b3:hover {
+            background-color: firebrick;
+            border-radius: 8px;
+            border-color: firebrick;
+        }
+
+
+
+        #bt11{
+        background-color: darkgreen;
+        border-color: white;
+        font-size: 18px;
+      }
+
+      #bt11:hover{
+        background-color: green;
+      }
+
+      #bt22{
+        background-color: firebrick;
+        border-color: white;
+        font-size: 18px;
+      }
+
+      #bt22:hover{
+        background-color: maroon;
+      }
+
+
+      #btf{
+        background-color: darkgreen;
+        border-color: darkgreen;
+        font-size: 28px;
+      }
+
+      #btf:hover{
+        background-color: green;
+      }
+
+
+      
+       
+
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+
+    <%- include('layout/amenu'); %>
+    
+        
+
+          <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkblue; height: 130px;">
+            
+
+           
+      
+              <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                  <ul class="navbar-nav">
+
+
+
+
+                   
+                    <label class="navbar-brand" style="color: white; font-size: 20px;"><i class="material-icons">search</i>Filtros: </label>
+
+                    </li> &nbsp; &nbsp;
+                    
+                    <center>
+
+                    <form action="filtrar" class="form-inline">
+
+                      <%  
+
+                      const estadosUnicos = new Set();
+                      const cidadesUnicas = new Set();
+                      const bairrosUnicos = new Set();
+                      
+ 
+                      dadosBarbearia.forEach(function(dados) {
+
+                        if (dados.estado) estadosUnicos.add(dados.estado);
+                        if (dados.cidade) cidadesUnicas.add(dados.cidade);
+                        if (dados.bairro) bairrosUnicos.add(dados.bairro);
+                        
+                      });
+
+                    %>
+
+                    <li class="nav-item " >
+
+                      <label style="color: white; font-size: 20px;"><i class="material-icons">location_city</i>Estado:
+                        <input list="est" name="estado">
+                      </label>
+
+                      <datalist id="est">
+                        <% estadosUnicos.forEach(function(estado) { %>
+                          <option value="<%= estado %>"><%= estado %></option>
+                        <% }); %>
+                      </datalist>
+                      
+                        &nbsp;&nbsp;
+
+                        <label style="color: white; font-size: 20px;"><i class="material-icons">my_location</i>Cidade:
+                          <input list="cid" name="cidade">
+                        </label>
+  
+                        <datalist id="cid">
+                          <% cidadesUnicas.forEach(function(cidade) { %>
+                            <option value="<%= cidade %>"><%= cidade %></option>
+                          <% }); %>
+                        </datalist>
+
+                          &nbsp;&nbsp;
+
+                          <label style="color: white; font-size: 20px;"><i class="material-icons">holiday_village</i>Bairro:
+                            <input list="bai" name="bairro">
+                          </label>
+    
+                          <datalist id="bai">
+                            <% bairrosUnicos.forEach(function(bairro) { %>
+                              <option value="<%= bairro%>"><%= bairro %></option>
+                            <% }); %>
+                          </datalist>
+
+                        &nbsp;&nbsp;
+
+                        <label style="color: white; font-size: 20px;"><i class="material-icons">star</i>Nota:
+                          <input list="not" name="nota">
+                        </label>
+  
+                        <datalist id="not">
+
+                          <option value="0">0</option>
+                          
+                          <option value="1">1</option>
+                          
+                          <option value="2">2</option>
+                          
+                          <option value="3">3</option>
+                          
+                          <option value="4">4</option>
+                          
+                          <option value="5">5</option>
+
+                        </datalist>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                       
+                      
+                          <button type="submit" id="btf" class="btn btn-primary">Filtrar</button>
+                          
+                
+                
+                        </form>
+
+                      </center>
+
+                  </ul>
+                  
+
+                  </div>
+          </div>    
+
+          
+            </nav>
+      
+
+          <br><br><br>
+        
+
+        <center>
+        <h1 id="he">Lista de barbearias</h1>
+        </center>
+        <br>
+
+
+        <% if(aviso == "Nenhuma barbearia atende a esses filtros") {  %>
+
+          
+          <center>
+          <h3 class="alert alert-dark" role="alert"><%= aviso %></h3>
+          </center>
+
+    
+
+        <% } else if(dadosBarbearia.length === 0) { %>
+
+       
+
+          <center>
+            <h3 class="alert alert-warning" role="alert">Nenhuma barbearia foi cadastrada no sistema ainda!</h3>
+          </center>
+
+
+        <% } else { %>
+
+          <% if(aviso == "Escolha a barbearia e depois o profissional que deseja agendar!") {  %>
+
+            <center>
+              <h3 class="alert alert-success" role="alert"><%= aviso %></h3>
+              </center>
+
+            <%  } %>
+
+          <div class="container">
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 mx-auto">
+
+
+              <% dadosBarbearia.forEach(function(dados) { %>
+
+                <div class="col">
+
+                  <div class="card h-100" style="border-radius: 16px;">
+
+
+                    <img src="/imagesBar/<%=dados.imagem %>" class="card-img-top" alt="erro na imagem" height="300px" width="100%">
+
+                    <div class="card-body" style="background-color: #000080; border-radius: 16px;">
+
+                      <div style="background-color: white; border-radius: 16px; width: 99%;">
+                        <br>
+                      
+                      <h2 class="card-title" style="margin-left: 15px;"><%= dados.nome %></h2><br>
+                      <p class="card-text" style="font-size: 20px; margin-left: 15px;"><b>Estado: </b><%= dados.estado %></p>
+                      <p class="card-text" style="font-size: 20px; margin-left: 15px;"><b>Cidade: </b><%= dados.cidade %></p>
+                      <p class="card-text" style="font-size: 20px; margin-left: 15px;"><b>Bairro: </b><%= dados.bairro %></p>
+                      
+                      
+                     
+                      
+
+                      <p class="card-text" style="font-size: 20px; margin-left: 15px;"><b>Estrelas: </b>
+
+                        
+
+                        <% 
+                        const estrelas = dados.media === 0 ? 0 : Math.round(dados.media); 
+                        const estrelaSrc = `/estrelas/estrela${estrelas}.png`; 
+                    %>
+                    <img src="<%= estrelaSrc %>" alt="Nota" height="43px" />
+
+                    
+                      
+                        </p>
+                      
+                      
+                      <br>
+                    <center>
+
+                      <% if(nome && boolean == 1) {  %>
+
+                        
+
+                        <a class="btn btn-primary" id="bd"  style="margin-left: 15px;" href="/listagem-bard/<%=dados.id %>" role="button"><i class="material-icons">info</i> Ver mais detalhes</a> <br><br>
+                        <a class="btn btn-danger" id="b3" style="margin-left: 15px;" data-bs-toggle="modal" data-bs-target="#exampleModal<%= dados.id %>"><i class="material-icons">delete</i> Apagar barbearia</a>
+
+                        <br><br>
+
+                      <% } else { %>
+
+                        <a class="btn btn-primary" id="bd"  style="margin-left: 15px;" href="/listagem-bard/<%=dados.id %>" role="button"><i class="material-icons">info</i> Ver mais detalhes</a>
+                        <br><br>
+                      <% } %>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                  </center>
+
+                
+                <div class="modal fade" id="exampleModal<%= dados.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apagar barbearia da plataforma</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h5>Tem certeza de que deseja apagar essa barbearia?</h5>
+                      
+                      </div>
+
+                      
+
+                      <div class="modal-footer d-flex justify-content-center">
+                        <a href="/apagab/<%=dados.id %>" id="bt11" class="btn btn-primary">Sim</a>
+                        <button type="button" id="bt22" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                      </div>
+
+                      
+
+                    </div>
+                  </div>
+                </div>
+        
+              <% }); %>
+            </div>
+          </div>
+        
+        <% } %>
+      
+      
+      
+      
+          <br><br><br><br><br><br><br><br>
+          <br><br><br><br>
+
+
+
+     <%- include('layout/footer'); %>
+
+
+    
+</body>
+
+
+
+</html>
